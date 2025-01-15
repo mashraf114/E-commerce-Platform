@@ -1,14 +1,14 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Product 1",
-      "price": 100,
-      "category": "Category 1",
-      "sellerId": "Seller 1"
+      "id": "1",
+      "name": "Product 123",
+      "price": 10023,
+      "category": "Category 13",
+      "sellerId": "Seller 12"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Product 2",
       "price": 200,
       "category": "Category 2",

@@ -1,105 +1,248 @@
+// document.addEventListener("DOMContentLoaded", () => {
+//   const apiUrl = "http://localhost:3000";
+//   const productTable = document
+//     .getElementById("product-table")
+//     .querySelector("tbody");
+//   const addproductButton = document.getElementById("add-product");
+//   const modal = document.getElementById("product-form-modal");
+//   const productForm = document.getElementById("product-form");
+//   const closeFormButton = document.getElementById("close-form");
+//   const formTitle = document.getElementById("form-title");
+//   let editingproductId = null;
+
+//   const populateproductTable = (products) => {
+//     productTable.innerHTML = "";
+//     products.forEach((product) => {
+//       const newRow = document.createElement("tr");
+//       newRow.innerHTML = `
+//         <td>${product.id}</td>
+//         <td>${product.name}</td>
+//         <td>${product.email}</td>
+//         <td>${product.role}</td>
+//         <td>${product.password}</td>
+//         <td>
+//           <button class="edit-product" data-product-id="${product.id}">Edit</button>
+//           <button class="delete-product" data-product-id="${product.id}">Delete</button>
+//         </td>
+//       `;
+//       productTable.appendChild(newRow);
+//     });
+//   };
+
+//   // Show modal for adding new product
+//   addproductButton.addEventListener("click", () => {
+//     editingproductId = null;
+//     formTitle.textContent = "Add product";
+//     productForm.reset();
+//     modal.style.display = "block";
+//   });
+
+//   productTable.addEventListener("click", async (event) => {
+//     if (event.target.matches(".edit-product")) {
+//       const productId = event.target.dataset.productId;
+//       const row = event.target.closest("tr");
+//       const nameCell = row.children[1];
+//       const emailCell = row.children[2];
+//       const roleCell = row.children[3];
+//       const passwordCell = row.children[4];
+
+//       editingproductId = productId;
+//       formTitle.textContent = "Edit product";
+//       document.getElementById("product-name").value = nameCell.textContent;
+//       document.getElementById("product-email").value = emailCell.textContent;
+//       document.getElementById("product-role").value = roleCell.textContent;
+//       document.getElementById("product-password").value =
+//         passwordCell.textContent;
+//       modal.style.display = "block";
+//     }
+
+//     // Delete product when delete button is clicked
+//     if (event.target.matches(".delete-product")) {
+//       const productId = event.target.dataset.productId;
+//       const row = event.target.closest("tr");
+
+//       if (confirm("Are you sure you want to delete this product?")) {
+//         try {
+//           const response = await fetch(`${apiUrl}/products/${productId}`, {
+//             method: "DELETE",
+//           });
+
+//           if (response.ok) {
+//             console.log("product deleted.");
+//             row.remove(); // Remove the row from the table
+//           } else {
+//             console.error("Failed to delete product.");
+//           }
+//         } catch (error) {
+//           console.error("Error deleting product:", error);
+//         }
+//       }
+//     }
+//   });
+
+//   // Handle form submission for both add and edit
+//   productForm.addEventListener("submit", async (event) => {
+//     event.preventDefault();
+
+//     const productName = document.getElementById("product-name").value;
+//     const productEmail = document.getElementById("product-email").value;
+//     const productRole = document.getElementById("product-role").value;
+//     const productPassword = document.getElementById("product-password").value;
+
+//     const product = {
+//       id: editingproductId || String(Date.now()),
+//       name: productName,
+//       email: productEmail,
+//       role: productRole,
+//       password: productPassword,
+//     };
+
+//     const method = editingproductId ? "PUT" : "POST";
+//     const url = editingproductId
+//       ? `${apiUrl}/products/${editingproductId}`
+//       : `${apiUrl}/products`;
+
+//     try {
+//       const response = await fetch(url, {
+//         method: method,
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         body: JSON.stringify(product),
+//       });
+
+//       if (response.ok) {
+//         console.log("product saved successfully.");
+//         fetchData(); // Refresh the table
+//         modal.style.display = "none"; // Close the form
+//       } else {
+//         console.error("Failed to save product.");
+//       }
+//     } catch (error) {
+//       console.error("Error saving product:", error);
+//     }
+//   });
+
+//   // Close the modal
+//   closeFormButton.addEventListener("click", () => {
+//     modal.style.display = "none";
+//   });
+
+//   // Fetch and populate products
+//   const fetchData = async () => {
+//     try {
+//       const response = await fetch(`${apiUrl}/products`);
+//       const products = await response.json();
+//       populateproductTable(products);
+//     } catch (error) {
+//       console.error("Error fetching products:", error);
+//     }
+//   };
+
+//   fetchData();
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
   const apiUrl = "http://localhost:3000";
-  const userTable = document
-    .getElementById("user-table")
+  const productTable = document
+    .getElementById("product-table")
     .querySelector("tbody");
-  const addUserButton = document.getElementById("add-user");
-  const modal = document.getElementById("user-form-modal");
-  const userForm = document.getElementById("user-form");
+  const addProductButton = document.getElementById("add-product");
+  const modal = document.getElementById("product-form-modal");
+  const productForm = document.getElementById("product-form");
   const closeFormButton = document.getElementById("close-form");
   const formTitle = document.getElementById("form-title");
-  let editingUserId = null;
+  let editingProductId = null;
 
-  const populateUserTable = (users) => {
-    userTable.innerHTML = "";
-    users.forEach((user) => {
+  // Populate the product table
+  const populateProductTable = (products) => {
+    productTable.innerHTML = "";
+    products.forEach((product) => {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
-        <td>${user.id}</td>
-        <td>${user.name}</td>
-        <td>${user.email}</td>
-        <td>${user.role}</td>
+        <td>${product.id}</td>
+        <td>${product.name}</td>
+        <td>${product.price}</td>
+        <td>${product.category}</td>
+        <td>${product.sellerId}</td>
         <td>
-          <button class="edit-user" data-user-id="${user.id}">Edit</button>
-          <button class="delete-user" data-user-id="${user.id}">Delete</button>
+          <button class="edit-product" data-product-id="${product.id}">Edit</button>
+          <button class="delete-product" data-product-id="${product.id}">Delete</button>
         </td>
       `;
-      userTable.appendChild(newRow);
+      productTable.appendChild(newRow);
     });
   };
 
-  // Show modal for adding new user
-  addUserButton.addEventListener("click", () => {
-    editingUserId = null;
-    formTitle.textContent = "Add User";
-    userForm.reset();
+  // Show modal for adding a new product
+  addProductButton.addEventListener("click", () => {
+    editingProductId = null;
+    formTitle.textContent = "Add Product";
+    productForm.reset();
     modal.style.display = "block";
   });
 
-  // Show modal for editing user
-  userTable.addEventListener("click", async (event) => {
-    if (event.target.matches(".edit-user")) {
-      const userId = event.target.dataset.userId;
-      const row = event.target.closest("tr");
-      const nameCell = row.children[1];
-      const emailCell = row.children[2];
-      const roleCell = row.children[3];
-      const passwordCell = row.children[4];
+  // Handle table actions (edit/delete)
+  productTable.addEventListener("click", async (event) => {
+    if (event.target.matches(".edit-product")) {
+      const productId = event.target.dataset.productId;
+      const response = await fetch(`${apiUrl}/products/${productId}`);
+      const product = await response.json();
 
-      editingUserId = userId;
-      formTitle.textContent = "Edit User";
-      document.getElementById("user-name").value = nameCell.textContent;
-      document.getElementById("user-email").value = emailCell.textContent;
-      document.getElementById("user-role").value = roleCell.textContent;
-      document.getElementById("user-password").value = passwordCell.textContent;
+      editingProductId = productId;
+      formTitle.textContent = "Edit Product";
+      document.getElementById("product-name").value = product.name;
+      document.getElementById("product-price").value = product.price;
+      document.getElementById("product-category").value = product.category;
+      document.getElementById("product-seller").value = product.sellerId;
       modal.style.display = "block";
     }
 
-    // Delete user when delete button is clicked
-    if (event.target.matches(".delete-user")) {
-      const userId = event.target.dataset.userId;
-      const row = event.target.closest("tr");
+    if (event.target.matches(".delete-product")) {
+      const productId = event.target.dataset.productId;
 
-      if (confirm("Are you sure you want to delete this user?")) {
+      if (confirm("Are you sure you want to delete this product?")) {
         try {
-          const response = await fetch(`${apiUrl}/users/${userId}`, {
+          const response = await fetch(`${apiUrl}/products/${productId}`, {
             method: "DELETE",
           });
 
           if (response.ok) {
-            console.log("User deleted.");
-            row.remove(); // Remove the row from the table
+            console.log("Product deleted.");
+            fetchData(); // Refresh the table
           } else {
-            console.error("Failed to delete user.");
+            console.error("Failed to delete product.");
           }
         } catch (error) {
-          console.error("Error deleting user:", error);
+          console.error("Error deleting product:", error);
         }
       }
     }
   });
 
   // Handle form submission for both add and edit
-  userForm.addEventListener("submit", async (event) => {
+  productForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const userName = document.getElementById("user-name").value;
-    const userEmail = document.getElementById("user-email").value;
-    const userRole = document.getElementById("user-role").value;
-    const userPassword = document.getElementById("user-password").value;
+    const productName = document.getElementById("product-name").value;
+    const productPrice = parseFloat(
+      document.getElementById("product-price").value
+    );
+    const productCategory = document.getElementById("product-category").value;
+    const productSeller = document.getElementById("product-seller").value;
 
-    const user = {
-      id: editingUserId || String(Date.now()),
-      name: userName,
-      email: userEmail,
-      role: userRole,
-      password: userPassword,
+    const product = {
+      id: editingProductId || String(Date.now()),
+      name: productName,
+      price: productPrice,
+      category: productCategory,
+      sellerId: productSeller,
     };
 
-    const method = editingUserId ? "PUT" : "POST";
-    const url = editingUserId
-      ? `${apiUrl}/users/${editingUserId}`
-      : `${apiUrl}/users`;
+    const method = editingProductId ? "PUT" : "POST";
+    const url = editingProductId
+      ? `${apiUrl}/products/${editingProductId}`
+      : `${apiUrl}/products`;
 
     try {
       const response = await fetch(url, {
@@ -107,18 +250,18 @@ document.addEventListener("DOMContentLoaded", () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(user),
+        body: JSON.stringify(product),
       });
 
       if (response.ok) {
-        console.log("User saved successfully.");
+        console.log("Product saved successfully.");
         fetchData(); // Refresh the table
         modal.style.display = "none"; // Close the form
       } else {
-        console.error("Failed to save user.");
+        console.error("Failed to save product.");
       }
     } catch (error) {
-      console.error("Error saving user:", error);
+      console.error("Error saving product:", error);
     }
   });
 
@@ -127,14 +270,14 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = "none";
   });
 
-  // Fetch and populate users
+  // Fetch and populate products
   const fetchData = async () => {
     try {
-      const response = await fetch(`${apiUrl}/users`);
-      const users = await response.json();
-      populateUserTable(users);
+      const response = await fetch(`${apiUrl}/products`);
+      const products = await response.json();
+      populateProductTable(products);
     } catch (error) {
-      console.error("Error fetching users:", error);
+      console.error("Error fetching products:", error);
     }
   };
 
