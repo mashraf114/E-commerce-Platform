@@ -1,9 +1,32 @@
 {
   "users": [
     {
+      "id": "1",
+      "name": "dgrgr",
+      "email": "sregreg@sdf.com",
+      "role": "Seller",
+      "password": "          Edit          Delete        "
+    },
+    {
       "id": "1736947843405",
-      "name": "h",
-      "email": "r"
+      "name": "ewf",
+      "email": "wef@g.com",
+      "role": "user",
+      "password": "          Edit          Delete        "
+    },
+    {
+      "id": "1736949292270",
+      "name": "s",
+      "email": "d",
+      "role": "a",
+      "password": "f"
+    },
+    {
+      "id": "1736949736182",
+      "name": "M",
+      "email": "R@gmail",
+      "role": "Seller",
+      "password": "0974uf9023uf0"
     }
   ]
 }
