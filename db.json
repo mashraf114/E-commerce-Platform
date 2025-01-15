@@ -1,19 +1,21 @@
 {
+  "products": [
+    {
+      "id": 1,
+      "name": "Product 1",
+      "price": 100,
+      "category": "Category 1",
+      "sellerId": "Seller 1"
+    },
+    {
+      "id": 2,
+      "name": "Product 2",
+      "price": 200,
+      "category": "Category 2",
+      "sellerId": "Seller 2"
+    }
+  ],
   "users": [
-    {
-      "id": "1",
-      "name": "dgrgr",
-      "email": "sregreg@sdf.com",
-      "role": "Seller",
-      "password": "          Edit          Delete        "
-    },
-    {
-      "id": "1736947843405",
-      "name": "ewf",
-      "email": "wef@g.com",
-      "role": "user",
-      "password": "          Edit          Delete        "
-    },
     {
       "id": "1736949292270",
       "name": "s",
