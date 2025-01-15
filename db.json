@@ -1,4 +1,20 @@
 {
+  "users": [
+    {
+      "id": "1736949292270",
+      "name": "s",
+      "email": "d",
+      "role": "a",
+      "password": "f"
+    },
+    {
+      "id": "1736949736182",
+      "name": "M",
+      "email": "R@gmail",
+      "role": "Seller",
+      "password": "0974uf9023uf0"
+    }
+  ],
   "products": [
     {
       "id": "1",
@@ -15,20 +31,33 @@
       "sellerId": "Seller 2"
     }
   ],
-  "users": [
+  "orders": [
     {
-      "id": "1736949292270",
-      "name": "s",
-      "email": "d",
-      "role": "a",
-      "password": "f"
+      "id": "1",
+      "product": "Product 123",
+      "quantity": 3,
+      "totalCost": 300,
+      "status": "pending",
+      "sellerId": "Seller 1",
+      "customerId": "Customer 101"
     },
     {
-      "id": "1736949736182",
-      "name": "M",
-      "email": "R@gmail",
-      "role": "Seller",
-      "password": "0974uf9023uf0"
+      "id": "2",
+      "product": "Product 2",
+      "quantity": 5,
+      "totalCost": 1000,
+      "status": "shipped",
+      "sellerId": "Seller 2",
+      "customerId": "Customer 102"
+    },
+    {
+      "id": "1736965752014",
+      "product": "sa",
+      "quantity": 32,
+      "totalCost": 160,
+      "status": "pending",
+      "sellerId": "we",
+      "customerId": "we"
     }
   ]
 }
