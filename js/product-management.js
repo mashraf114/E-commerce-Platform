@@ -165,6 +165,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${product.price}</td>
         <td>${product.category}</td>
         <td>${product.sellerId}</td>
+        <td>${product.status}</td>
         <td>
           <button class="edit-product" data-product-id="${product.id}">Edit</button>
           <button class="delete-product" data-product-id="${product.id}">Delete</button>
@@ -230,6 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
     );
     const productCategory = document.getElementById("product-category").value;
     const productSeller = document.getElementById("product-seller").value;
+    const productStatus = document.getElementById("product-status").value; // Get selected status
 
     const product = {
       id: editingProductId || String(Date.now()),
@@ -237,6 +239,7 @@ document.addEventListener("DOMContentLoaded", () => {
       price: productPrice,
       category: productCategory,
       sellerId: productSeller,
+      status: productStatus, // Include status in the product object
     };
 
     const method = editingProductId ? "PUT" : "POST";

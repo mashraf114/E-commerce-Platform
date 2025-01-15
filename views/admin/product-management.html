@@ -53,11 +53,11 @@
               <th>Price</th>
               <th>Category</th>
               <th>Seller ID</th>
+              <th>Status</th>
               <th>Actions</th>
             </tr>
           </thead>
           <tbody>
-            <!-- Populated dynamically -->
           </tbody>
         </table>
         
@@ -73,10 +73,15 @@
         
               <label for="product-category">Category:</label>
               <input type="text" id="product-category" required /><br />
-        
+  
               <label for="product-seller">Seller ID:</label>
               <input type="text" id="product-seller" required /><br />
-        
+                <!-- Add Status Dropdown -->
+  <label for="product-status">Status:</label>
+  <select id="product-status" name="status">
+    <option value="approved">Approved</option>
+    <option value="rejected">Rejected</option>
+  </select>
               <button type="submit">Save</button>
               <button type="button" id="close-form">Cancel</button>
             </form>
