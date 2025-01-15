@@ -1,46 +1,9 @@
 {
   "users": [
     {
-      "id": "816b",
-      "username": "testuser",
-      "role": "Admin",
-      "password": "password123"
-    },
-    {
-      "id": "05c5",
-      "username": "testCustomer",
-      "role": "Customer",
-      "password": "password123"
-    },
-    {
-      "id": "3d8c",
-      "username": null,
-      "role": null,
-      "password": "password123"
-    },
-    {
-      "id": "08f9",
-      "username": null,
-      "role": null,
-      "password": "password123"
-    },
-    {
-      "id": "1f6a",
-      "username": "testSeller",
-      "role": "Seller",
-      "password": "Seller1"
-    },
-    {
-      "id": "8290",
-      "username": null,
-      "role": null,
-      "password": null
-    },
-    {
-      "id": "c17b",
-      "username": "سيثبسي",
-      "role": "Seller",
-      "password": "32"
+      "id": "1736947843405",
+      "name": "h",
+      "email": "r"
     }
   ]
 }
