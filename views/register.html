@@ -3,11 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Account</title>
+    <title>Amazon Create Account</title>
     <style>
       body {
+        font-family: Arial, sans-serif;
         margin: 0;
         padding: 0;
+        display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
@@ -17,6 +19,7 @@
         width: 360px;
         background-color: white;
         padding: 20px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
         border-radius: 8px;
         text-align: left;
       }
@@ -61,7 +64,9 @@
         cursor: pointer;
         border-radius: 4px;
       }
-
+      .create-account-container button:hover {
+        background-color: #e7b93f;
+      }
       .create-account-container .terms {
         font-size: 12px;
         color: #555;
@@ -71,7 +76,9 @@
         color: #0066c0;
         text-decoration: none;
       }
-
+      .create-account-container .terms a:hover {
+        text-decoration: underline;
+      }
       .additional-options {
         margin-top: 20px;
         font-size: 14px;
@@ -80,6 +87,9 @@
       .additional-options a {
         color: #0066c0;
         text-decoration: none;
+      }
+      .additional-options a:hover {
+        text-decoration: underline;
       }
     </style>
   </head>

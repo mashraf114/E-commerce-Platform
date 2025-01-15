@@ -12,17 +12,12 @@
   height: 60px;
   background-color: #0f1111;
   color: white;
-  text-align: center;
-}
-
-.navbar::after {
-  content: "";
-  display: block;
-  clear: both;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .nav-logo {
-  float: left;
   height: 50px;
   width: 100px;
 }
@@ -45,8 +40,57 @@
 }
 
 .add-icon {
-  float: right;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: white;
+  margin-left: 25px;
+  width: 600px;
+  height: 40px;
+  padding: 10px 0px 10px 0px;
+  border-radius: 30px;
+}
+
+.nav-search:hover {
+  border: 2px solid #febd68;
+}
+
+.search-select {
+  background-color: #f3f3f3;
+  height: 40px;
+  width: 70px;
+  padding: 0 0 0 10px;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  border: 2px solid #febd68;
+  outline: none;
+}
+
+.search-input {
+  margin-left: 10px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.search-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  width: 60px;
+  height: 40px;
+  background-color: #febd68;
+  color: white;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
 }
 
 span {
@@ -55,7 +99,6 @@ span {
 
 .nav-cart {
   font-size: 0.7rem;
-  float: right;
 }
 
 .nav-cart i {
@@ -67,12 +110,12 @@ span {
   height: 40px;
   background-color: #222f3d;
   color: white;
-  text-align: center;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .panel-options {
-  display: inline-block;
   width: 70%;
   font-size: 0.85rem;
 }
@@ -82,21 +125,50 @@ span {
   margin-left: 10px;
 }
 
+/** hero sectrion **/
+.hero-section {
+  background-image: url("/assets/hero_image.jpg");
+  background-size: cover;
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+}
+
+.hero-msg {
+  height: 40px;
+  background-color: white;
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  width: 90%;
+  margin-bottom: 25px;
+  border-radius: 30px;
+}
+
+.hero-msg a {
+  text-decoration: none;
+  color: #007185;
+}
+
+/** shop section **/
 .shop-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   background-color: #e2e7e6;
   padding-bottom: 20px;
-  text-align: center;
 }
 
 .box {
-  display: inline-block;
   border-radius: 10px;
   height: 410px;
   width: 23%;
   background-color: white;
   padding: 15px 0px 15px;
-  margin: 25px 1%;
-  vertical-align: top;
+  margin-top: 25px;
 }
 
 h2 {
@@ -106,7 +178,8 @@ h2 {
 .box-img {
   height: 300px;
   border-radius: 10px;
-  margin: 1rem 0;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   background-size: cover;
 }
 
@@ -125,23 +198,22 @@ h2 {
   background-color: #37475a;
   height: 50px;
   color: white;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-size: 0.85rem;
-  line-height: 50px;
 }
 
 .foot-panel2 {
   background-color: #222f3d;
   color: white;
   height: 300px;
-  text-align: center;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 ul {
   margin-top: 30px;
-  display: inline-block;
-  vertical-align: top;
-  text-align: left;
 }
 
 ul li,
@@ -165,8 +237,9 @@ li a:hover {
   border-top: 0.5px solid gray;
   height: 70px;
   background-color: #232f3e;
-  text-align: center;
-  line-height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .foot-panel3 .logo {
@@ -174,15 +247,16 @@ li a:hover {
   background-size: cover;
   height: 50px;
   width: 100px;
-  margin: 0 auto;
 }
 
 .foot-panel4 {
   background-color: #131a22;
   color: white;
   height: 70px;
-  text-align: center;
-  line-height: 1.5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .pages a {
