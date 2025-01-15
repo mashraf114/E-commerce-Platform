@@ -1,7 +1,3 @@
-// user-management.js
-
-const apiUrl = "http://localhost:3000";
-
 document.addEventListener("DOMContentLoaded", () => {
   const apiUrl = "http://localhost:3000";
   const userTable = document
@@ -41,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Show modal for editing user
-  userTable.addEventListener("click", (event) => {
+  userTable.addEventListener("click", async (event) => {
     if (event.target.matches(".edit-user")) {
       const userId = event.target.dataset.userId;
       const row = event.target.closest("tr");
@@ -57,6 +53,29 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("user-role").value = roleCell.textContent;
       document.getElementById("user-password").value = passwordCell.textContent;
       modal.style.display = "block";
+    }
+
+    // Delete user when delete button is clicked
+    if (event.target.matches(".delete-user")) {
+      const userId = event.target.dataset.userId;
+      const row = event.target.closest("tr");
+
+      if (confirm("Are you sure you want to delete this user?")) {
+        try {
+          const response = await fetch(`${apiUrl}/users/${userId}`, {
+            method: "DELETE",
+          });
+
+          if (response.ok) {
+            console.log("User deleted.");
+            row.remove(); // Remove the row from the table
+          } else {
+            console.error("Failed to delete user.");
+          }
+        } catch (error) {
+          console.error("Error deleting user:", error);
+        }
+      }
     }
   });
 
@@ -120,31 +139,4 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   fetchData();
-
-  // Product Management
-  const productTable = document
-    .getElementById("product-table")
-    .querySelector("tbody");
-
-  productTable.addEventListener("click", (event) => {
-    if (event.target.matches(".approve-product")) {
-      // Logic to approve product
-      console.log("Approve Product:", event.target.dataset.productId);
-    } else if (event.target.matches(".reject-product")) {
-      // Logic to reject product
-      console.log("Reject Product:", event.target.dataset.productId);
-    }
-  });
-
-  // Order Monitoring
-  const orderTable = document
-    .getElementById("order-table")
-    .querySelector("tbody");
-
-  orderTable.addEventListener("click", (event) => {
-    if (event.target.matches(".update-order")) {
-      // Logic to update order
-      console.log("Update Order:", event.target.dataset.orderId);
-    }
-  });
 });

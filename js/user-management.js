@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${user.name}</td>
         <td>${user.email}</td>
         <td>${user.role}</td>
+        <td>${user.password}</td>
         <td>
           <button class="edit-user" data-user-id="${user.id}">Edit</button>
           <button class="delete-user" data-user-id="${user.id}">Delete</button>
@@ -36,7 +37,6 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.style.display = "block";
   });
 
-  // Show modal for editing user
   userTable.addEventListener("click", async (event) => {
     if (event.target.matches(".edit-user")) {
       const userId = event.target.dataset.userId;
