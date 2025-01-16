@@ -69,7 +69,7 @@
       "id": "d623",
       "name": "4433",
       "price": 44333,
-      "category": "3344",
+      "category": "E",
       "description": "3344",
       "image": "3344",
       "ratings": []
@@ -78,9 +78,27 @@
       "id": "921c",
       "name": "55",
       "price": 55,
-      "category": "55",
+      "category": "Clothes",
       "description": "55",
-      "image": "55",
+      "image": "/assets/drill.jpg",
+      "ratings": []
+    },
+    {
+      "id": "eedf",
+      "name": "Cordless Drill ",
+      "price": 99,
+      "category": "Tools & Home Improvement",
+      "description": "CRAFTSMAN V20 MAX Cordless Drill and Impact Driver, Power Tool Combo Kit with 2 Batteries and Charger (CMCK200C2AM)\n",
+      "image": "/assets/drill.jpg",
+      "ratings": []
+    },
+    {
+      "id": "f30b",
+      "name": "PS4",
+      "price": 999,
+      "category": "Video Games",
+      "description": "OIVO PS4 Stand with PS4 Cooling Fan Cooler for PlayStation 4/PS4 Slim/PS4 Pro, PS4 Pro Vertical Stand with PS4 Controller Charger Dock Station and 12 Game Slots\n",
+      "image": "/assets/ps4.jpg",
       "ratings": []
     }
   ],

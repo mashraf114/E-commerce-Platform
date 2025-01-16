@@ -72,8 +72,26 @@
               <input type="number" id="product-price" required /><br />
         
               <label for="product-category">Category:</label>
-              <input type="text" id="product-category" required /><br />
-  
+              <select id="product-category" required>
+                <option value="" disabled selected>Select product category</option>
+                <option value="Clothes">Clothes</option>
+                <option value="Health & Personal Care
+                ">Health & Personal Care
+              </option>
+                <option value="Furniture">Furniture</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Video Games
+                ">Video Games
+              </option>
+                <option value="Pet Care
+                ">Pet Care
+              </option>
+                <option value="Tools & Home Improvement
+                ">Tools & Home Improvement
+              </option>
+                <option value="Kitchen">Kitchen</option>
+              </select>
+              <br />
               <label for="product-seller">Seller ID:</label>
               <input type="text" id="product-seller" required /><br />
                 <!-- Add Status Dropdown -->
@@ -81,7 +99,7 @@
   <select id="product-status" name="status">
     <option value="approved">Approved</option>
     <option value="rejected">Rejected</option>
-  </select>
+  </select><br />
               <button type="submit">Save</button>
               <button type="button" id="close-form">Cancel</button>
             </form>

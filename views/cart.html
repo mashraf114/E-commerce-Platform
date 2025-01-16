@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Cart</title>
+    <style>
+      .cart-container {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .cart-item {
+        display: flex;
+        gap: 20px;
+      }
+      .cart-item img {
+        width: 100px;
+        height: 100px;
+      }
+      .cart-item-details {
+        display: flex;
+        flex-direction: column;
+      }
+      .total-price {
+        font-size: 24px;
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="cart-container"></div>
+    <p class="total-price"></p>
+    <script src="../js/cart.js"></script>
+  </body>
+</html>
