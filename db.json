@@ -17,18 +17,22 @@
   ],
   "products": [
     {
-      "id": "1",
-      "name": "Product 123",
-      "price": 10023,
-      "category": "Category 13",
-      "sellerId": "Seller 12"
+      "id": "d623",
+      "name": "4433",
+      "price": 44333,
+      "category": "3344",
+      "description": "3344",
+      "image": "3344",
+      "ratings": []
     },
     {
-      "id": "2",
-      "name": "Product 2",
-      "price": 200,
-      "category": "Category 2",
-      "sellerId": "Seller 2"
+      "id": "921c",
+      "name": "55",
+      "price": 55,
+      "category": "55",
+      "description": "55",
+      "image": "55",
+      "ratings": []
     }
   ],
   "orders": [
