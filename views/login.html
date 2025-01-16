@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Amazon Login</title>
+    <script defer src="../js/login.js"></script>
+
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -31,7 +33,7 @@
         font-size: 18px;
         margin-bottom: 20px;
       }
-      .login-container input[type="text"] {
+      .login-container input {
         width: 100%;
         padding: 10px;
         margin-bottom: 20px;
@@ -92,8 +94,9 @@
         alt="Amazon"
       />
       <h1>Sign in</h1>
-      <input type="text" placeholder="Email or mobile phone number" />
-      <button>Continue</button>
+      <input type="email" placeholder="Email" />
+      <input type="password" placeholder="Password" />
+      <button type="button" id="continue-btn">Continue</button>
       <p>
         By continuing, you agree to Amazon's
         <a href="#">Conditions of Use</a> and <a href="#">Privacy Notice</a>.
