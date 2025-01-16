@@ -51,21 +51,9 @@
       "password": "11111111"
     },
     {
-      "id": "1736995449820",
-      "name": "sskkkkkkkk",
-      "email": "saaaaaahaba9m@gmail.com",
-      "password": "if (response.ok) {         console.log(\"User registered successfully. Redirecting to login...\");         setTimeout(() => {           window.location.href = \"login.html\"; // Use replace for no back history         }, 1000); // Delay by 1 second       } else {         alert(\"Failed to register user.\");       }"
-    },
-    {
       "id": "1736995620388",
       "name": "sskkkkkkkk",
       "email": "saaaaaaaaahaba9m@gmail.com",
-      "password": "saaaaaaaaahaba9m"
-    },
-    {
-      "id": "1736995637760",
-      "name": "saaaaaaaaahaba9msaaaaaaaaahaba9m",
-      "email": "saaaaaaaaahaba9msaaaaaaaaahaba9m@gmail.com",
       "password": "saaaaaaaaahaba9m"
     },
     {
