@@ -5,12 +5,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailInput = document.getElementById("email");
   const passwordInput = document.getElementById("password");
   const repasswordInput = document.getElementById("repassword");
+  const roleInputs = document.getElementsByName("role");
 
   // Regex patterns
   const nameRegex = /^[A-Za-z\s]+$/;
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const passwordRegex =
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
+
   // Handle form submission
   registerForm.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -19,6 +21,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const userEmail = emailInput.value.trim();
     const userPassword = passwordInput.value.trim();
     const userRepassword = repasswordInput.value.trim();
+
+    // Get selected role
+    const selectedRole = Array.from(roleInputs).find(
+      (input) => input.checked
+    )?.value;
+    if (!selectedRole) {
+      alert("Please select a role (Customer or Seller).");
+      return;
+    }
 
     // Validate name
     if (!nameRegex.test(userName)) {
@@ -51,6 +62,7 @@ document.addEventListener("DOMContentLoaded", () => {
       name: userName,
       email: userEmail,
       password: userPassword,
+      role: selectedRole, // Send the selected role ("customer" or "seller")
     };
 
     try {

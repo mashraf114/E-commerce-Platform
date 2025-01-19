@@ -33,6 +33,20 @@
       "name": "Mohamed Hosny",
       "email": "Hosny@Hosny.com",
       "password": "Hosny123%"
+    },
+    {
+      "id": "1737284020287",
+      "name": "Admin",
+      "email": "Admin@Admin.com",
+      "password": "Admin123$",
+      "role": "customer"
+    },
+    {
+      "id": "1737284909642",
+      "name": "seller",
+      "email": "seller@seller.com",
+      "password": "selleR123%",
+      "role": "seller"
     }
   ],
   "products": [

@@ -84,3 +84,54 @@ body {
 .additional-options a:hover {
   text-decoration: underline;
 }
+
+/* Style the container for the radio buttons */
+.create-account-container form div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 15px;
+}
+
+/* Style the radio buttons to make them larger and custom-looking */
+input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #888;
+  border-radius: 50%;
+  outline: none;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+input[type="radio"]:checked {
+  border-color: #007bff;
+  background-color: #007bff;
+}
+
+input[type="radio"]:checked::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+
+/* Label styling for better alignment and appearance */
+label {
+  font-size: 16px;
+  cursor: pointer;
+  color: #333;
+}
+
+/* Add a hover effect for the labels */
+label:hover {
+  color: #007bff;
+}
