@@ -1,0 +1,190 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f3f3f3;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h2.section-title {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ffa41c;
+  padding-bottom: 5px;
+}
+
+/* Buttons */
+button {
+  background-color: #ffa41c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+button:hover {
+  background-color: #e5941a;
+}
+
+/* Edit Button */
+.edit-btn {
+  background-color: #007185; /* Amazon's blue color */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.edit-btn:hover {
+  background-color: #005f6b; /* Darker blue on hover */
+}
+
+/* Delete Button */
+.delete-btn {
+  background-color: #ff4d4d; /* Red color */
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.delete-btn:hover {
+  background-color: #cc0000; /* Darker red on hover */
+}
+
+/* Product Form */
+.product-form {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.product-form h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.product-form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-size: 14px;
+  color: #555;
+}
+
+.product-form input,
+.product-form select,
+.product-form textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.product-form textarea {
+  resize: vertical;
+}
+
+.product-form button[type="submit"] {
+  background-color: #007185;
+  width: 100%;
+}
+
+.product-form button[type="submit"]:hover {
+  background-color: #005f6b;
+}
+
+/* Product List */
+#product-list {
+  margin-top: 20px;
+}
+
+#product-list h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+#products {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+#products th,
+#products td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#products th {
+  background-color: #f7f7f7;
+  font-size: 14px;
+  color: #333;
+}
+
+#products td {
+  font-size: 14px;
+  color: #555;
+}
+
+#products td img {
+  max-width: 100px;
+  height: auto;
+  border-radius: 4px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  h2.section-title {
+    font-size: 18px;
+  }
+
+  .product-form input,
+  .product-form select,
+  .product-form textarea {
+    font-size: 12px;
+  }
+
+  #products th,
+  #products td {
+    padding: 8px;
+    font-size: 12px;
+  }
+}

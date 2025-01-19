@@ -1,0 +1,148 @@
+ /* Profile Page Styles */
+ .profile-page {
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+}
+
+.profile-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-header h1 {
+  font-size: 24px;
+  color: #333;
+  margin-left: 10px;
+}
+
+.profile-header i {
+  font-size: 32px;
+  color: #ffa41c;
+}
+
+/* Admin Navigation Styles */
+.admin-nav {
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.admin-nav h3 {
+  font-size: 18px;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ffa41c;
+  padding-bottom: 10px;
+}
+
+.admin-nav ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 15px;
+  justify-content: flex-start; /* Align items to the left */
+}
+
+.admin-nav ul li {
+  display: inline;
+}
+
+.admin-nav ul li a {
+  color: #0066c0;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.admin-nav ul li a:hover {
+  background-color: #f0f2f5;
+}
+
+/* Profile Section Styles */
+.profile-section {
+  margin-bottom: 30px;
+}
+
+.profile-section h2 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 15px;
+  border-bottom: 2px solid #ffa41c;
+  padding-bottom: 5px;
+}
+
+.profile-section p {
+  font-size: 16px;
+  color: #555;
+  margin: 10px 0;
+}
+
+.profile-section a {
+  color: #0066c0;
+  text-decoration: none;
+}
+
+.profile-section a:hover {
+  text-decoration: underline;
+}
+
+.profile-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.profile-section ul li {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.profile-section ul li i {
+  margin-right: 10px;
+  color: #ffa41c;
+}
+
+.profile-section button {
+  background-color: #ffa41c;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.profile-section button:hover {
+  background-color: #e5941a;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .admin-nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .admin-nav ul li a {
+    display: block;
+    text-align: center;
+  }
+}

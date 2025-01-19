@@ -1,19 +1,15 @@
-// Function to render the cart
 const renderCart = () => {
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
   const cartContainer = document.querySelector(".cart-container");
 
-  // Clear the cart container before rendering
   cartContainer.innerHTML = "";
 
-  // Check if the cart is empty
   if (cartItems.length === 0) {
     cartContainer.innerHTML = "<p>Your cart is empty.</p>";
     document.querySelector(".total-price").textContent = "";
     return;
   }
 
-  // Render each cart item
   cartItems.forEach((item, index) => {
     const cartItem = document.createElement("div");
     cartItem.classList.add("cart-item");
@@ -35,7 +31,6 @@ const renderCart = () => {
     cartContainer.appendChild(cartItem);
   });
 
-  // Calculate total price
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -45,7 +40,6 @@ const renderCart = () => {
   } item${cartItems.length > 1 ? "s" : ""}): EGP ${totalPrice}`;
 };
 
-// Function to change the quantity of an item
 const changeQuantity = (index, change) => {
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
   cartItems[index].quantity += change;
@@ -56,7 +50,6 @@ const changeQuantity = (index, change) => {
   renderCart();
 };
 
-// Function to delete an item from the cart
 const deleteItem = (index) => {
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
   cartItems.splice(index, 1);
@@ -64,21 +57,17 @@ const deleteItem = (index) => {
   renderCart();
 };
 
-// Function to proceed to checkout
 const proceedToCheckout = () => {
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
   if (cartItems.length === 0) {
     alert("Your cart is empty. Please add items to proceed.");
   } else {
-    // Redirect to the checkout page
     window.location.href = "/views/checkout.html";
   }
 };
 
-// Add event listener to the "Proceed to Buy" button
 document
   .querySelector(".proceed-to-buy")
   .addEventListener("click", proceedToCheckout);
 
-// Call renderCart when the cart page is loaded
 document.addEventListener("DOMContentLoaded", renderCart);

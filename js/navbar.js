@@ -2,20 +2,18 @@ console.log("navbar.js is running");
 
 console.log("DOM fully loaded");
 
-// Function to update the "sign-in" text
 function updateSignInText() {
   console.log("function updateSignInText()");
   console.log(
     "document.querySelector",
     document.querySelector(".nav-signin p span")
   );
-  const signInElement = document.querySelector(".nav-signin p span"); // "Hello, sign in" text
+  const signInElement = document.querySelector(".nav-signin p span");
   const accountListsElement = document.querySelector(
     ".nav-signin p.nav-second"
-  ); // "Account & Lists" text
-  const navSignInDiv = document.querySelector(".nav-signin"); // Entire clickable div
+  );
+  const navSignInDiv = document.querySelector(".nav-signin");
 
-  // Check if a user is stored in sessionStorage
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
   if (!navSignInDiv) {
@@ -24,7 +22,6 @@ function updateSignInText() {
   }
 
   if (currentUser) {
-    // If there is a logged-in user, update the text
     if (signInElement) {
       signInElement.textContent = `Hello, ${currentUser.name}`;
     }
@@ -33,13 +30,11 @@ function updateSignInText() {
         "Account & Lists <i class='fa-sharp fa-solid fa-circle-chevron-down'></i>";
     }
 
-    // Add click event to redirect to profile page
     navSignInDiv.style.cursor = "pointer";
     navSignInDiv.onclick = () => {
       window.location.href = "/views/profile.html";
     };
   } else {
-    // If no user is found, reset text and redirect to login page on click
     if (signInElement) {
       signInElement.textContent = "Hello, sign in";
     }
@@ -48,7 +43,6 @@ function updateSignInText() {
         "Account & Lists <i class='fa-sharp fa-solid fa-circle-chevron-down'></i>";
     }
 
-    // Add click event for login redirect
     navSignInDiv.style.cursor = "pointer";
     navSignInDiv.onclick = () => {
       window.location.href = "/views/login.html";
@@ -56,7 +50,6 @@ function updateSignInText() {
   }
 }
 
-// Function to update the "Deliver to" address
 async function updateDeliverToAddress() {
   const deliverToAddressElement = document.getElementById("deliver-to-address");
 
@@ -100,20 +93,17 @@ function updateCartQuantity() {
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
   if (!currentUser) {
-    // If no user is logged in, hide the cart quantity
-    cartQuantityElement.textContent = ""; // Clear the text
-    cartQuantityElement.style.display = "none"; // Hide the element
+    cartQuantityElement.textContent = "";
+    cartQuantityElement.style.display = "none";
     return;
   }
 
-  // If a user is logged in, update the cart quantity
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
   cartQuantityElement.textContent = totalQuantity;
-  cartQuantityElement.style.display = "inline"; // Ensure the element is visible
+  cartQuantityElement.style.display = "inline";
 }
 
-// Function to handle category selection
 function handleCategorySelection() {
   const categorySelect = document.getElementById("category-select");
 
@@ -132,7 +122,6 @@ function handleCategorySelection() {
   });
 }
 
-// Call functions to update the navbar
 updateSignInText();
 updateDeliverToAddress();
 updateCartQuantity();

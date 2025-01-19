@@ -85,10 +85,8 @@ const renderCartItems = () => {
   const cartItemsContainer = document.getElementById("cart-items");
   const totalPriceElement = document.getElementById("total-price");
 
-  // Clear the cart items container before rendering
   cartItemsContainer.innerHTML = "";
 
-  // Render each cart item
   cartItems.forEach((item) => {
     const cartItem = document.createElement("div");
     cartItem.classList.add("cart-item");
@@ -98,7 +96,6 @@ const renderCartItems = () => {
     cartItemsContainer.appendChild(cartItem);
   });
 
-  // Calculate total price
   const totalPrice = cartItems.reduce(
     (total, item) => total + item.price * item.quantity,
     0
@@ -106,7 +103,6 @@ const renderCartItems = () => {
   totalPriceElement.textContent = `Total: EGP ${totalPrice}`;
 };
 
-// Function to handle the "Place Order" button
 const placeOrder = async () => {
   const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
   if (cartItems.length === 0) {
@@ -118,10 +114,8 @@ const placeOrder = async () => {
     'input[name="payment-method"]:checked'
   ).value;
 
-  // Get the current user
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 
-  // Create an order object
   const order = {
     items: cartItems,
     total: cartItems.reduce(
@@ -130,11 +124,10 @@ const placeOrder = async () => {
     ),
     paymentMethod,
     date: new Date().toLocaleString(),
-    customerId: currentUser ? currentUser.id : null, // Include the customer ID
+    customerId: currentUser ? currentUser.id : null,
   };
 
   try {
-    // Send a POST request to save the order to db.json
     const response = await fetch("http://localhost:3000/orders", {
       method: "POST",
       headers: {
@@ -144,17 +137,14 @@ const placeOrder = async () => {
     });
 
     if (response.ok) {
-      // Clear the cart
       localStorage.removeItem("cart");
 
-      // Show a confirmation alert using SweetAlert
       Swal.fire({
         title: "Order Confirmed!",
         text: "Your order has been placed successfully.",
         icon: "success",
         confirmButtonText: "OK",
       }).then(() => {
-        // Redirect to the home page or order confirmation page
         window.location.href = "/index.html";
       });
     } else {
@@ -177,10 +167,8 @@ const placeOrder = async () => {
   }
 };
 
-// Add event listener to the "Place Order" button
 document
   .getElementById("place-order-button")
   .addEventListener("click", placeOrder);
 
-// Call renderCartItems when the checkout page is loaded
 document.addEventListener("DOMContentLoaded", renderCartItems);
