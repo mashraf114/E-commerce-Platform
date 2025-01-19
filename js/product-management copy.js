@@ -1,6 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
   const userRole = JSON.parse(sessionStorage.getItem("currentUser")).role;
+  console.log("userRole", userRole);
   const userId = JSON.parse(sessionStorage.getItem("currentUser")).id;
+  console.log("userId", userId);
 
   const apiUrl = "http://localhost:3000";
   const productTable = document
@@ -13,34 +15,24 @@ document.addEventListener("DOMContentLoaded", () => {
   const formTitle = document.getElementById("form-title");
   let editingProductId = null;
 
-  if (userRole === "seller" || userRole === "Seller") {
+  if (userRole === "seller") {
     const statusHeader = document.querySelector(
       "#product-table th:nth-child(6)"
     );
+
     const statusCells = document.querySelectorAll(
       "#product-table td:nth-child(6)"
     );
-
-    // Hide status column and disable status input for sellers
     statusCells.forEach((cell) => {
       cell.style.display = "none";
     });
-    statusHeader.style.display = "none";
+
     document.getElementById("product-status").style.display = "none";
   }
 
   const populateProductTable = (products) => {
     productTable.innerHTML = "";
-    let filteredProducts = products;
-
-    // Filter products for seller role
-    if (userRole === "seller" || userRole === "Seller") {
-      filteredProducts = products.filter(
-        (product) => product.sellerId === userId
-      );
-    }
-
-    filteredProducts.forEach((product) => {
+    products.forEach((product) => {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
         <td>${product.id}</td>
@@ -82,10 +74,11 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("product-category").value = product.category;
       document.getElementById("product-seller").value = product.sellerId;
 
-      if (userRole === "seller" || userRole === "Seller") {
-        document.getElementById("product-status").style.display = "none";
+      // Show or hide status field based on user role
+      if (userRole === "seller") {
+        document.getElementById("product-status").style.display = "none"; // Hide for sellers
       } else {
-        document.getElementById("product-status").style.display = "block";
+        document.getElementById("product-status").style.display = "block"; // Show for others
       }
 
       modal.style.display = "block";
@@ -127,7 +120,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const productSeller = document.getElementById("product-seller").value;
 
     let productStatus =
-      userRole !== "seller" && userRole !== "Seller"
+      userRole !== "seller"
         ? document.getElementById("product-status").value
         : "";
 

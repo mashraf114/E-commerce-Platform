@@ -21,6 +21,8 @@
     <script defer src="../../js/product-management.js"></script>
   </head>
   <body>
+    <div id="navbar-placeholder"></div>
+
     <header>
       <h1>Product management</h1>
       <nav>
@@ -32,7 +34,7 @@
 
     <main>
       <section id="product-management">
-        <h2>product Management</h2>
+        <h2>Product Management</h2>
         <button id="add-product">Add product</button>
         <table id="product-table">
           <thead>
@@ -94,12 +96,11 @@
               <br />
               <label for="product-seller">Seller ID:</label>
               <input type="text" id="product-seller" required /><br />
-                <!-- Add Status Dropdown -->
-  <label for="product-status">Status:</label>
-  <select id="product-status" name="status">
-    <option value="approved">Approved</option>
-    <option value="rejected">Rejected</option>
-  </select><br />
+                <label for="product-status">Status:</label>
+                <select id="product-status" name="status">
+                  <option value="approved">Approved</option>
+                  <option value="rejected">Rejected</option>
+                </select><br />
               <button type="submit">Save</button>
               <button type="button" id="close-form">Cancel</button>
             </form>

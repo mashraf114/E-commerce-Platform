@@ -233,9 +233,8 @@ function confirmLogout() {
   });
 }
 
-// Log out function to remove the session data and redirect to home page
 function logout() {
-  sessionStorage.removeItem("currentUser"); // Remove the logged-in user from sessionStorage
+  sessionStorage.removeItem("currentUser");
   Swal.fire({
     title: "Logged Out!",
     text: "You have been successfully logged out.",

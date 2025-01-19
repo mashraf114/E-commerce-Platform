@@ -29,7 +29,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  // Show modal for adding new user
   addUserButton.addEventListener("click", () => {
     editingUserId = null;
     formTitle.textContent = "Add User";
@@ -55,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
       modal.style.display = "block";
     }
 
-    // Delete user when delete button is clicked
     if (event.target.matches(".delete-user")) {
       const userId = event.target.dataset.userId;
       const row = event.target.closest("tr");
@@ -67,8 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
           });
 
           if (response.ok) {
-            console.log("User deleted.");
-            row.remove(); // Remove the row from the table
+            row.remove();
           } else {
             console.error("Failed to delete user.");
           }
@@ -79,7 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Handle form submission for both add and edit
   userForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
@@ -111,9 +107,8 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (response.ok) {
-        console.log("User saved successfully.");
-        fetchData(); // Refresh the table
-        modal.style.display = "none"; // Close the form
+        fetchData();
+        modal.style.display = "none";
       } else {
         console.error("Failed to save user.");
       }
@@ -122,12 +117,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Close the modal
   closeFormButton.addEventListener("click", () => {
     modal.style.display = "none";
   });
 
-  // Fetch and populate users
   const fetchData = async () => {
     try {
       const response = await fetch(`${apiUrl}/users`);

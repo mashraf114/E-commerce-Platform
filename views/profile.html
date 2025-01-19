@@ -40,24 +40,38 @@
         <a href="#">Edit Information</a>
       </div>
 
-      <!-- Order History Section -->
       <div class="profile-section">
-        <h2><i class="fas fa-shopping-cart"></i> Order History</h2>
-        <ul id="order-history">
-          <li>
-            <i class="fas fa-box"></i>
-            <strong>Order Total: $1395</strong> - 1/18/2025, 6:20:11 PM
-            <br />
-            <small>Payment Method: cash-on-delivery</small>
-          </li>
-          <li>
-            <i class="fas fa-box"></i>
-            <strong>Order Total: $88666</strong> - 1/18/2025, 6:29:59 PM
-            <br />
-            <small>Payment Method: cash-on-delivery</small>
-          </li>
-        </ul>
-        <a href="#">View All Orders</a>
+        <h2><i class="fas fa-user"></i> Personal Information</h2>
+        <form id="profile-form">
+          <label for="edit-name">Name:</label>
+          <input
+            type="text"
+            id="edit-name"
+            name="name"
+            value="Adele"
+            required
+          />
+
+          <label for="edit-email">Email:</label>
+          <input
+            type="email"
+            id="edit-email"
+            name="email"
+            value="adele@gmail.com"
+            required
+          />
+
+          <label for="edit-phone">Phone:</label>
+          <input
+            type="text"
+            id="edit-phone"
+            name="phone"
+            value="Not provided"
+          />
+
+          <button type="submit">Save Changes</button>
+        </form>
+        <a href="#" id="edit-profile-link">Edit Information</a>
       </div>
 
       <!-- Logout Button -->

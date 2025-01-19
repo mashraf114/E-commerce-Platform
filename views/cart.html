@@ -8,9 +8,6 @@
     <link rel="icon" href="/assets/miniLogo.png" type="image/x-icon" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/cart.css" />
-    <script defer src="/js/navbar.js"></script>
-
- 
   </head>
   <body>
     <div id="navbar-placeholder"></div>
@@ -23,6 +20,12 @@
         .then((response) => response.text())
         .then((data) => {
           document.getElementById("navbar-placeholder").innerHTML = data;
+          const script = document.createElement("script");
+          script.src = "../js/navbar.js";
+          document.body.appendChild(script);
+        })
+        .catch((error) => {
+          console.error("Error loading navbar:", error);
         });
     </script>
   </body>

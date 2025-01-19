@@ -27,6 +27,12 @@
       "homeAddress": "123 zagzag",
       "workAddress": "",
       "defaultAddress": "home"
+    },
+    {
+      "id": "1737281206935",
+      "name": "Mohamed Hosny",
+      "email": "Hosny@Hosny.com",
+      "password": "Hosny123%"
     }
   ],
   "products": [
@@ -58,7 +64,7 @@
         8,
         23
       ],
-      "sellerId": "99",
+      "sellerId": "",
       "status": "approved"
     },
     {
@@ -75,7 +81,7 @@
       "name": "ww",
       "price": 22,
       "category": "Electronics",
-      "sellerId": "adsxa",
+      "sellerId": "1737247913535",
       "status": "approved"
     },
     {
@@ -84,6 +90,7 @@
       "price": 22,
       "category": "Pet Care\n                ",
       "description": "qq",
+      "sellerId": "1737247913535",
       "image": "qq",
       "ratings": []
     },
