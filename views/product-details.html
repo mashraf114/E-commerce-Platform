@@ -3,92 +3,20 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Anker Soundcore R50i</title>
-    <script defer src="../js/cart.js"></script>
-
+    <title>Product Details</title>
     <script defer src="../js/product-details.js"></script>
 
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f5f5f5;
-      }
-      .container {
-        display: flex;
-        max-width: 1200px;
-        margin: 20px auto;
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-      }
-      .left-section {
-        flex: 1;
-      }
-      .left-section img {
-        width: 100%;
-        border-radius: 10px;
-      }
-      .right-section {
-        flex: 2;
-        margin-left: 20px;
-      }
-      .title {
-        font-size: 24px;
-        font-weight: bold;
-        color: #333;
-        margin-bottom: 10px;
-      }
-      .rating {
-        color: #ff9900;
-        margin-bottom: 10px;
-      }
-      .price {
-        font-size: 24px;
-        color: #b12704;
-        margin-bottom: 10px;
-      }
-      .price .old-price {
-        text-decoration: line-through;
-        color: #888;
-        font-size: 16px;
-        margin-left: 10px;
-      }
-      .features {
-        list-style: none;
-        padding: 0;
-        margin-bottom: 20px;
-      }
-      .features li {
-        margin-bottom: 5px;
-      }
-      .buttons {
-        display: flex;
-        gap: 10px;
-      }
-      .button {
-        padding: 10px 20px;
-        text-align: center;
-        color: white;
-        background-color: #ff9900;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-      }
-      .button.buy {
-        background-color: #ffa41c;
-      }
-      .protection-plan {
-        margin-top: 20px;
-        font-size: 14px;
-      }
-      .protection-plan input {
-        margin-right: 10px;
-      }
-    </style>
+    <link rel="icon" href="/assets/miniLogo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
   </head>
-  <body>
+  <body class="product-details-page">
+    <div id="navbar-placeholder"></div>
+
     <div class="container">
       <div class="left-section">
         <img src="/assets/image-placeholder.jpg" />
@@ -127,5 +55,19 @@
         </div>
       </div>
     </div>
+
+    <script>
+      fetch("/views/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+          const script = document.createElement("script");
+          script.src = "/js/navbar.js";
+          document.body.appendChild(script);
+        })
+        .catch((error) => {
+          console.error("Error loading navbar:", error);
+        });
+    </script>
   </body>
 </html>

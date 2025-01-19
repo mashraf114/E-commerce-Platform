@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Your Profile</title>
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <script defer src="../js/profile.js"></script>
+    <link rel="icon" href="/assets/miniLogo.png" type="image/x-icon" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+      /* Profile Page Styles */
+      .profile-page {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      .profile-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .profile-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+
+      .profile-header h1 {
+        font-size: 24px;
+        color: #333;
+        margin-left: 10px;
+      }
+
+      .profile-header i {
+        font-size: 32px;
+        color: #ffa41c;
+      }
+
+      .profile-section {
+        margin-bottom: 30px;
+      }
+
+      .profile-section h2 {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ffa41c;
+        padding-bottom: 5px;
+      }
+
+      .profile-section p {
+        font-size: 16px;
+        color: #555;
+        margin: 10px 0;
+      }
+
+      .profile-section a {
+        color: #0066c0;
+        text-decoration: none;
+      }
+
+      .profile-section a:hover {
+        text-decoration: underline;
+      }
+
+      .profile-section ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      .profile-section ul li {
+        background-color: #f9f9f9;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 4px;
+        border: 1px solid #ddd;
+      }
+
+      .profile-section ul li i {
+        margin-right: 10px;
+        color: #ffa41c;
+      }
+
+      .profile-section button {
+        background-color: #ffa41c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .profile-section button:hover {
+        background-color: #e5941a;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .profile-header h1 {
+          font-size: 20px;
+        }
+
+        .profile-section h2 {
+          font-size: 18px;
+        }
+
+        .profile-section p {
+          font-size: 14px;
+        }
+
+        .profile-section button {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body class="profile-page">
+    <div id="navbar-placeholder"></div>
+
+    <div class="profile-container">
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <i class="fas fa-user-circle"></i>
+        <h1>Your Profile</h1>
+      </div>
+
+      <!-- Personal Information Section -->
+      <div class="profile-section">
+        <h2><i class="fas fa-user"></i> Personal Information</h2>
+        <p><strong>Name:</strong> <span id="profile-name">Loading...</span></p>
+        <p>
+          <strong>Email:</strong> <span id="profile-email">Loading...</span>
+        </p>
+        <p>
+          <strong>Phone:</strong> <span id="profile-phone">Loading...</span>
+        </p>
+        <a href="#">Edit Information</a>
+      </div>
+
+      <!-- Order History Section -->
+      <div class="profile-section">
+        <h2><i class="fas fa-shopping-cart"></i> Order History</h2>
+        <ul id="order-history">
+          <li>Loading order history...</li>
+        </ul>
+        <a href="#">View All Orders</a>
+      </div>
+
+      <!-- Addresses Section -->
+      <div class="profile-section">
+        <h2><i class="fas fa-map-marker-alt"></i> Addresses</h2>
+        <ul id="profile-addresses">
+          <li>Loading addresses...</li>
+        </ul>
+        <a href="#manage-addresses">Manage Addresses</a>
+      </div>
+
+      <!-- Logout Button -->
+      <div class="profile-section">
+        <button onclick="confirmLogout()">Log Out</button>
+      </div>
+    </div>
+    <script>
+      // Load navbar.html
+      fetch("/views/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          // Insert the navbar HTML into the placeholder
+          document.getElementById("navbar-placeholder").innerHTML = data;
+
+          // Load navbar.js after the navbar is inserted
+          const script = document.createElement("script");
+          script.src = "/js/navbar.js";
+          document.body.appendChild(script);
+        })
+        .catch((error) => {
+          console.error("Error loading navbar:", error);
+        });
+    </script>
+  </body>
+</html>

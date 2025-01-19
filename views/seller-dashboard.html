@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Seller Dashboard</title>
+    <script defer src="../../js/seller-dashboard.js"></script>
+    <link rel="icon" href="/assets/miniLogo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script defer src="/js/navbar.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      /* General Styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f3f3;
+        margin: 0;
+        padding: 0;
+      }
+
+      .dashboard-container {
+        max-width: 1200px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      h1 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      h2.section-title {
+        font-size: 20px;
+        color: #333;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ffa41c;
+        padding-bottom: 5px;
+      }
+
+      /* Buttons */
+      button {
+        background-color: #ffa41c;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+      }
+
+      button:hover {
+        background-color: #e5941a;
+      }
+
+      /* Edit Button */
+      .edit-btn {
+        background-color: #007185; /* Amazon's blue color */
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+
+      .edit-btn:hover {
+        background-color: #005f6b; /* Darker blue on hover */
+      }
+
+      /* Delete Button */
+      .delete-btn {
+        background-color: #ff4d4d; /* Red color */
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+      }
+
+      .delete-btn:hover {
+        background-color: #cc0000; /* Darker red on hover */
+      }
+
+      /* Product Form */
+      .product-form {
+        margin-bottom: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+
+      .product-form h3 {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .product-form label {
+        display: block;
+        margin: 10px 0 5px;
+        font-size: 14px;
+        color: #555;
+      }
+
+      .product-form input,
+      .product-form select,
+      .product-form textarea {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .product-form textarea {
+        resize: vertical;
+      }
+
+      .product-form button[type="submit"] {
+        background-color: #007185;
+        width: 100%;
+      }
+
+      .product-form button[type="submit"]:hover {
+        background-color: #005f6b;
+      }
+
+      /* Product List */
+      #product-list {
+        margin-top: 20px;
+      }
+
+      #product-list h3 {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      #products {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+
+      #products th,
+      #products td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+
+      #products th {
+        background-color: #f7f7f7;
+        font-size: 14px;
+        color: #333;
+      }
+
+      #products td {
+        font-size: 14px;
+        color: #555;
+      }
+
+      #products td img {
+        max-width: 100px;
+        height: auto;
+        border-radius: 4px;
+      }
+
+      /* Responsive Design */
+      @media (max-width: 768px) {
+        .dashboard-container {
+          padding: 10px;
+        }
+
+        h1 {
+          font-size: 20px;
+        }
+
+        h2.section-title {
+          font-size: 18px;
+        }
+
+        .product-form input,
+        .product-form select,
+        .product-form textarea {
+          font-size: 12px;
+        }
+
+        #products th,
+        #products td {
+          padding: 8px;
+          font-size: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="navbar-placeholder"></div>
+
+    <div class="dashboard-container">
+      <h1>Seller Dashboard</h1>
+
+      <section class="product-management">
+        <h2 class="section-title">Product Management</h2>
+        <button id="add-product-btn">Add New Product</button>
+
+        <!-- Product Form -->
+        <div id="product-form" class="product-form">
+          <h3>Add/Edit Product</h3>
+          <form id="product-form-element">
+            <label for="product-name">Product Name:</label>
+            <input
+              type="text"
+              id="product-name"
+              placeholder="Enter product name"
+              required
+            />
+
+            <label for="product-price">Price:</label>
+            <input
+              type="number"
+              id="product-price"
+              placeholder="Enter price in USD"
+              required
+            />
+
+            <label for="product-category">Category:</label>
+            <select id="product-category" required>
+              <option value="" disabled selected>
+                Select product category
+              </option>
+              <option value="Clothes">Clothes</option>
+              <option value="Health & Personal Care">
+                Health & Personal Care
+              </option>
+              <option value="Furniture">Furniture</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Video Games">Video Games</option>
+              <option value="Pet Care">Pet Care</option>
+              <option value="Tools & Home Improvement">
+                Tools & Home Improvement
+              </option>
+              <option value="Kitchen">Kitchen</option>
+            </select>
+
+            <label for="product-description">Description:</label>
+            <textarea
+              id="product-description"
+              placeholder="Enter product description"
+              rows="4"
+              required
+            ></textarea>
+
+            <label for="product-image">Image URL:</label>
+            <input
+              type="text"
+              id="product-image"
+              placeholder="Enter image URL"
+              required
+            />
+
+            <button type="submit">Save Product</button>
+          </form>
+        </div>
+
+        <!-- Product List -->
+        <div id="product-list">
+          <h3>Product List</h3>
+          <table id="products" cellspacing="0" cellpadding="10">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Image</th>
+                <th>Ratings</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Product 1</td>
+                <td>$50</td>
+                <td>Electronics</td>
+                <td>High-quality product</td>
+                <td>
+                  <img
+                    src="https://via.placeholder.com/100"
+                    alt="Product Image"
+                  />
+                </td>
+                <td>4.5</td>
+                <td>
+                  <button class="edit-btn">Edit</button>
+                  <button class="delete-btn">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+    <script>
+      fetch("/views/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+          const script = document.createElement("script");
+          script.src = "/js/navbar.js";
+          document.body.appendChild(script);
+        })
+        .catch((error) => {
+          console.error("Error loading navbar:", error);
+        });
+    </script>
+  </body>
+</html>

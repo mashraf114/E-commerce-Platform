@@ -1,23 +1,22 @@
-// Function to fetch product details based on product ID
-const fetchProductDetails = async () => {
-  const urlParams = new URLSearchParams(window.location.search); // Get the query parameters
-  const productId = urlParams.get("id"); // Retrieve the product ID from the query parameter
+// Function to get query parameters from the URL
+function getQueryParam(param) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(param);
+}
 
+// Fetch product details from the API
+const fetchProductDetails = async (productId) => {
   try {
-    // Fetch product data from the API using the product ID
     const response = await fetch(`http://localhost:3000/products/${productId}`);
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
-
     const product = await response.json();
-    renderProductDetails(product); // Call the function to render product details
+    renderProductDetails(product);
   } catch (error) {
     console.error("Error fetching product details:", error);
   }
 };
-
-// Function to render the product details on the page
 const renderProductDetails = (product) => {
   const title = document.querySelector(".title");
   const rating = document.querySelector(".rating");
@@ -26,57 +25,96 @@ const renderProductDetails = (product) => {
   const featuresList = document.querySelector(".features");
   const image = document.querySelector(".left-section img");
 
+  // Update the page's <title> tag
+  document.title = product.name;
+
   // Set the title and other details from the fetched product data
   title.textContent = product.name;
-  rating.textContent = `4.0 ⭐⭐⭐⭐ | ${product.ratings.length} ratings`; // Assuming ratings will be displayed dynamically
+
+  // Handle ratings
+  if (product.ratings && product.ratings.length > 0) {
+    rating.textContent = `4.0 ⭐⭐⭐⭐ | ${product.ratings.length.toLocaleString()} ratings`;
+  } else {
+    rating.textContent = "Be the first to rate";
+  }
+
   price.innerHTML = `EGP ${product.price.toLocaleString()}`; // Price format
   oldPrice.innerHTML = `EGP ${product.price * 2}`; // Example of old price, adjust based on actual data if needed
 
   // Render features
   featuresList.innerHTML = ""; // Clear existing features
-  product.description.split("\n").forEach((feature) => {
+  const description = product.description || "No description available."; // Handle missing description
+  description.split("\n").forEach((feature) => {
     const li = document.createElement("li");
     li.textContent = feature;
     featuresList.appendChild(li);
   });
 
   // Set product image
-  image.src = product.image;
+  image.src = product.image || "/assets/default-image.jpg"; // Handle missing image
 
-  // Add event listeners for buttons
-  // Add event listener for 'Add to Cart' button
-  document.querySelector(".add-to-cart").addEventListener("click", () => {
-    const productToAdd = {
-      id: product.id,
-      name: product.name,
-      price: product.price,
-      quantity: 1, // Default quantity is 1
-      image: product.image,
-    };
+  // Add event listener for "Add to Cart" button
+  const addToCartButton = document.querySelector(".add-to-cart");
+  if (addToCartButton) {
+    addToCartButton.addEventListener("click", () => {
+      if (!isUserLoggedIn()) {
+        window.location.href = "/views/login.html"; // Redirect to the login page
+        return;
+      }
 
-    // Get existing cart from localStorage
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      // Add the product to the cart
+      const productToAdd = {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        quantity: 1, // Default quantity is 1
+        image: product.image,
+      };
 
-    // Check if the product is already in the cart
-    const existingProduct = cart.find((item) => item.id === productToAdd.id);
-    if (existingProduct) {
-      existingProduct.quantity += 1; // Increase quantity if product already in cart
-    } else {
-      cart.push(productToAdd); // Add product to the cart
-    }
+      // Get existing cart from localStorage
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    // Save updated cart to localStorage
-    localStorage.setItem("cart", JSON.stringify(cart));
+      // Check if the product is already in the cart
+      const existingProduct = cart.find((item) => item.id === productToAdd.id);
+      if (existingProduct) {
+        existingProduct.quantity += 1; // Increase quantity if product already in cart
+      } else {
+        cart.push(productToAdd); // Add product to the cart
+      }
 
-    // Optionally, you can display a confirmation message
-    alert(`${productToAdd.name} added to cart!`);
-  });
+      // Save updated cart to localStorage
+      localStorage.setItem("cart", JSON.stringify(cart));
 
-  // Add event listener for 'Buy Now' button (you can link it to a checkout page or payment process)
-  document.querySelector(".buy").addEventListener("click", () => {
-    alert("Proceed to buy");
-  });
+      // Display a confirmation message
+      alert(`${productToAdd.name} added to cart!`);
+    });
+  }
+
+  // Add event listener for "Buy Now" button
+  const buyButton = document.querySelector(".buy");
+  if (buyButton) {
+    buyButton.addEventListener("click", () => {
+      if (!isUserLoggedIn()) {
+        window.location.href = "/views/login.html"; // Redirect to the login page
+        return;
+      }
+
+      // Redirect to the checkout page with the cart data
+      window.location.href = "/views/checkout.html";
+    });
+  }
 };
 
-// Call the function to fetch and render product details on page load
-fetchProductDetails();
+// Check if a user is logged in
+function isUserLoggedIn() {
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+  return currentUser !== null; // Returns true if a user is logged in, false otherwise
+}
+
+// Get the product ID from the URL and fetch product details
+const productId = getQueryParam("id");
+if (productId) {
+  fetchProductDetails(productId);
+} else {
+  console.error("Product ID not found in the URL");
+}

@@ -1,0 +1,98 @@
+<header>
+  <div class="navbar">
+    <!-- Logo -->
+    <div class="nav-logo">
+      <div class="logo" onclick="window.location.href='/'"></div>
+    </div>
+
+    <!-- Deliver to Section -->
+    <div class="nav-address">
+      <p class="add-first">Deliver to</p>
+      <div class="add-icon">
+        <i class="fa-solid fa-location-crosshairs"></i>
+        <p class="add-second" id="deliver-to-address">Egypt</p>
+      </div>
+    </div>
+
+    <!-- Search Bar -->
+    <div class="nav-search">
+      <select
+        class="search-select"
+        id="category-select"
+        aria-label="Select category"
+      >
+        <option value="" selected disabled>All</option>
+        <option value="Furniture">Furniture</option>
+        <option value="Electronics">Electronics</option>
+        <option value="Clothes">Clothes</option>
+        <option value="Health & Personal Care">Health & Personal Care</option>
+        <option value="Video Games">Video Games</option>
+        <option value="Pet Care">Pet Care</option>
+        <option value="Kitchen">Kitchen</option>
+        <option value="Books">Books</option>
+        <option value="Sports & Outdoors">Sports & Outdoors</option>
+        <option value="Toys & Games">Toys & Games</option>
+      </select>
+      <input
+        class="search-input"
+        type="text"
+        placeholder="Search...."
+        aria-label="Search products"
+      />
+      <i
+        class="fa-solid fa-magnifying-glass search-icon"
+        aria-label="Search"
+      ></i>
+    </div>
+
+    <!-- Language Selector -->
+    <div class="nav-language">
+      <i class="fa-solid fa-globe"></i> EN
+      <span><i class="fa-sharp fa-solid fa-circle-chevron-down"></i></span>
+    </div>
+
+    <!-- Account & Sign-in Section -->
+    <div class="nav-signin" id="user-info">
+      <p>
+        <span>Hello, sign in</span>
+      </p>
+    </div>
+
+    <!-- Orders Section -->
+    <div
+      class="nav-account"
+      onclick="window.location.href='/views/profile.html'"
+    >
+      <p><span>Account</span></p>
+      <p class="nav-second">
+        & Orders
+        <i class="fa-sharp fa-solid fa-circle-chevron-down"></i>
+      </p>
+    </div>
+
+    <!-- Cart Section -->
+    <div class="nav-cart" onclick="window.location.href='/views/cart.html'">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cart-quantity" style="color: #ff9900; font-weight: bold"
+        >0</span
+      >
+      Cart
+    </div>
+  </div>
+
+  <!-- Bottom Panel -->
+  <div class="bottom-panel">
+    <div class="panel-alt">
+      <i class="fa-solid fa-bars"></i>
+      All
+    </div>
+    <div class="panel-options">
+      <p>Today's Deals</p>
+      <p>Customer Service</p>
+      <p>Registry</p>
+      <p>Gift Cards</p>
+      <p>Sell</p>
+    </div>
+    <div class="panel-deals">Shop deals in Electronics</div>
+  </div>
+</header>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout</title>
+    <link rel="icon" href="/assets/miniLogo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <script defer src="/js/navbar.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script defer src="../js/checkout.js"></script>
+    <style>
+      /* Checkout Page Styles */
+      .checkout-page {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      .checkout-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .checkout-section {
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+      }
+
+      .checkout-section h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        color: #333;
+      }
+
+      .checkout-section p {
+        margin: 10px 0;
+        color: #555;
+      }
+
+      .checkout-section label {
+        display: block;
+        margin: 10px 0;
+        font-size: 14px;
+      }
+
+      .checkout-section input[type="radio"] {
+        margin-right: 10px;
+      }
+
+      #cart-items {
+        margin-top: 10px;
+      }
+
+      .cart-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid #ddd;
+      }
+
+      .cart-item:last-child {
+        border-bottom: none;
+      }
+
+      #total-price {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px;
+      }
+
+      #place-order-button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background-color: #ffa41c;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      #place-order-button:hover {
+        background-color: #e5941a;
+      }
+    </style>
+  </head>
+  <body class="checkout-page">
+    <div id="navbar-placeholder"></div>
+
+    <div class="checkout-container">
+      <h1>Checkout</h1>
+
+      <!-- Shipping Address -->
+      <div class="checkout-section">
+        <h2>1. Shipping Address</h2>
+        <div id="shipping-address">
+          <p>
+            No address saved. <a href="/views/profile.html">Add an address</a>
+          </p>
+        </div>
+      </div>
+
+      <!-- Payment Method -->
+      <div class="checkout-section">
+        <h2>2. Choose a Payment Method</h2>
+        <form id="payment-form">
+          <label>
+            <input
+              type="radio"
+              name="payment-method"
+              value="cash-on-delivery"
+              checked
+            />
+            Cash on Delivery
+          </label>
+          <br />
+          <label>
+            <input type="radio" name="payment-method" value="credit-card" />
+            Credit/Debit Card
+          </label>
+          <br />
+          <label>
+            <input type="radio" name="payment-method" value="paypal" />
+            PayPal
+          </label>
+        </form>
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="checkout-section">
+        <h2>3. Items and Shipping</h2>
+        <div id="cart-items"></div>
+        <p id="total-price"></p>
+      </div>
+
+      <!-- Place Order Button -->
+      <button id="place-order-button">Place Order</button>
+    </div>
+
+    <script>
+      fetch("/views/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+          const script = document.createElement("script");
+          script.src = "/js/navbar.js";
+          document.body.appendChild(script);
+        })
+        .catch((error) => {
+          console.error("Error loading navbar:", error);
+        });
+    </script>
+  </body>
+</html>

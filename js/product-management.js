@@ -19,12 +19,16 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${product.id}</td>
         <td>${product.name}</td>
         <td>${product.price}</td>
-        <td>${product.category}</td>
+      <td>${product.category.trim()}</td>
         <td>${product.sellerId}</td>
         <td>${product.status}</td>
         <td>
-          <button class="edit-product" data-product-id="${product.id}">Edit</button>
-          <button class="delete-product" data-product-id="${product.id}">Delete</button>
+          <button class="edit-product" data-product-id="${
+            product.id
+          }">Edit</button>
+          <button class="delete-product" data-product-id="${
+            product.id
+          }">Delete</button>
         </td>
       `;
       productTable.appendChild(newRow);
@@ -50,7 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
       formTitle.textContent = "Edit Product";
       document.getElementById("product-name").value = product.name;
       document.getElementById("product-price").value = product.price;
-      document.getElementById("product-category").value = product.category;
+      document.getElementById("product-category").value = product.category; // Ensure this is set
+
       document.getElementById("product-seller").value = product.sellerId;
       modal.style.display = "block";
     }
@@ -85,9 +90,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const productPrice = parseFloat(
       document.getElementById("product-price").value
     );
-    const productCategory = document.getElementById("product-category").value;
+    const productCategory = document
+      .getElementById("product-category")
+      .value.trim() // Trim the category
+      .replace(/\n/g, ""); // Remove newline characters
     const productSeller = document.getElementById("product-seller").value;
-    const productStatus = document.getElementById("product-status").value; // Get selected status
+
+    const productStatus = document.getElementById("product-status").value;
+    // Get selected status
 
     const product = {
       id: editingProductId || String(Date.now()),

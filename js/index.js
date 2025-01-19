@@ -59,5 +59,25 @@ function logout() {
   window.location.replace("/index.html"); // Redirect to home page
 }
 
+// Function to handle category box clicks
+function handleCategoryClick(event) {
+  const categoryBox = event.target.closest(".box");
+  if (categoryBox) {
+    // Find the <h2> element inside the clicked box
+    const categoryName = categoryBox.querySelector("h2")?.textContent;
+    if (categoryName) {
+      // Redirect to product-list.html with the selected category
+      window.location.href = `views/product-list.html?category=${encodeURIComponent(
+        categoryName
+      )}`;
+    }
+  }
+}
+
+// Add event listener to the parent container
+document
+  .querySelector(".shop-section")
+  .addEventListener("click", handleCategoryClick);
+
 // Call the function to update the text when the page loads
 window.onload = updateSignInText;

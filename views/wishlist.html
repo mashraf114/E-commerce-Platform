@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Search</title>
+    <title>Wishlist</title>
     <script defer src="../js/wishlist.js"></script>
     <link rel="icon" href="/assets/miniLogo.png" type="image/x-icon" />
     <link rel="stylesheet" href="/css/style.css" />
@@ -57,13 +57,18 @@
   <body>
     <div id="navbar-placeholder"></div>
 
+    <h1>My Wishlist</h1>
     <div id="products">
       <!-- Products will be dynamically added here -->
     </div>
-      <h2>Your Search</h2>
-      
+    <div id="wishlist">
+      <h2>Your Wishlist</h2>
+      <ul id="wishlist-items">
+        <!-- Wishlist items will be dynamically added here -->
+      </ul>
     </div>
     <script>
+      // Load the navigation bar
       fetch("/views/navbar.html")
         .then((response) => response.text())
         .then((data) => {

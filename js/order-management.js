@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
     orders.forEach((order) => {
       const newRow = document.createElement("tr");
       newRow.innerHTML = `
-       <td>${order.id}</td>
+        <td>${order.id}</td>
         <td>${order.product}</td>
         <td>${order.quantity}</td>
         <td>${order.totalCost}</td>
@@ -54,29 +54,40 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("order-status").value = order.status;
       document.getElementById("order-seller").value = order.sellerId;
       document.getElementById("order-customer").value = order.customerId;
-      document.getElementById("order-totalCost").value = order.totalCost;
+      document.getElementById("order-price-per-unit").value =
+        order.totalCost / order.quantity;
       modal.style.display = "block";
     }
 
     if (event.target.matches(".delete-order")) {
       const orderId = event.target.dataset.orderId;
 
-      if (confirm("Are you sure you want to delete this order?")) {
-        try {
-          const response = await fetch(`${apiUrl}/orders/${orderId}`, {
-            method: "DELETE",
-          });
+      // Show a confirmation popup using SweetAlert
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+      }).then(async (result) => {
+        if (result.isConfirmed) {
+          try {
+            const response = await fetch(`${apiUrl}/orders/${orderId}`, {
+              method: "DELETE",
+            });
 
-          if (response.ok) {
-            console.log("Order deleted.");
-            fetchData(); // Refresh the table
-          } else {
-            console.error("Failed to delete order.");
+            if (response.ok) {
+              Swal.fire("Deleted!", "The order has been deleted.", "success");
+              fetchData(); // Refresh the table
+            } else {
+              Swal.fire("Error!", "Failed to delete the order.", "error");
+            }
+          } catch (error) {
+            console.error("Error deleting order:", error);
           }
-        } catch (error) {
-          console.error("Error deleting order:", error);
         }
-      }
+      });
     }
   });
 
@@ -121,11 +132,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
 
       if (response.ok) {
-        console.log("Order saved successfully.");
+        Swal.fire("Success!", "Order saved successfully.", "success");
         fetchData(); // Refresh the table
         modal.style.display = "none"; // Close the form
       } else {
-        console.error("Failed to save order.");
+        Swal.fire("Error!", "Failed to save the order.", "error");
       }
     } catch (error) {
       console.error("Error saving order:", error);

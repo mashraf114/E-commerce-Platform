@@ -8,60 +8,25 @@
       "password": "f"
     },
     {
-      "id": "1736949736182",
-      "name": "M",
-      "email": "R@gmail",
-      "role": "Seller",
-      "password": "0974uf9023uf0"
-    },
-    {
-      "id": "1736992228173",
-      "name": "aaaaaaaaa",
-      "email": "aaaaaaaaa@C",
-      "password": "aaaaaaaaa"
-    },
-    {
-      "id": "1736992331960",
-      "name": "shabam",
-      "email": "shabam@G.CPOM",
-      "password": "shabam"
-    },
-    {
-      "id": "1736992571579",
-      "name": "aaaaaaaaa",
-      "email": "shabaaa9m@gmail.com",
-      "password": "shabaaa9m"
-    },
-    {
       "id": "1736995182518",
       "name": "kkkk",
       "email": "kkkkkkkk@gmail.com",
-      "password": "kkkkkkkk"
+      "password": "kkkkkkkk",
+      "phone": "wegegewgewg",
+      "role": "Engineer",
+      "homeAddress": "123 zagzag",
+      "workAddress": "321 zagzag",
+      "defaultAddress": "home"
     },
     {
-      "id": "1736995251857",
-      "name": "x",
-      "email": "shaxba9m@gmail.com",
-      "password": "shaxba9m"
-    },
-    {
-      "id": "1736995408899",
-      "name": "aaaa",
-      "email": "mohameaaaaadashrfelrayan@gmail.com",
-      "password": "11111111"
-    },
-    {
-      "id": "1736995620388",
-      "name": "sskkkkkkkk",
-      "email": "saaaaaaaaahaba9m@gmail.com",
-      "password": "saaaaaaaaahaba9m"
-    },
-    {
-      "id": "1736995652888",
-      "name": "ac",
-      "email": "ac@gmail.com",
-      "role": "Seller",
-      "password": "saaaaaaaaahaba9m"
+      "id": "1737247913535",
+      "name": "Adele",
+      "email": "adele@gmail.com",
+      "role": "Customer",
+      "password": "adele@gmail.com",
+      "homeAddress": "123 zagzag",
+      "workAddress": "",
+      "defaultAddress": "home"
     }
   ],
   "products": [
@@ -69,10 +34,9 @@
       "id": "d623",
       "name": "4433",
       "price": 44333,
-      "category": "E",
-      "description": "3344",
-      "image": "3344",
-      "ratings": []
+      "category": "Clothes",
+      "sellerId": "undefined",
+      "status": "approved"
     },
     {
       "id": "921c",
@@ -87,18 +51,67 @@
       "id": "eedf",
       "name": "Cordless Drill ",
       "price": 99,
-      "category": "Tools & Home Improvement",
-      "description": "CRAFTSMAN V20 MAX Cordless Drill and Impact Driver, Power Tool Combo Kit with 2 Batteries and Charger (CMCK200C2AM)\n",
+      "category": "Health & Personal Care",
       "image": "/assets/drill.jpg",
-      "ratings": []
+      "description": "qqkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
+      "ratings": [
+        8,
+        23
+      ],
+      "sellerId": "99",
+      "status": "approved"
     },
     {
       "id": "f30b",
       "name": "PS4",
       "price": 999,
-      "category": "Video Games",
-      "description": "OIVO PS4 Stand with PS4 Cooling Fan Cooler for PlayStation 4/PS4 Slim/PS4 Pro, PS4 Pro Vertical Stand with PS4 Controller Charger Dock Station and 12 Game Slots\n",
-      "image": "/assets/ps4.jpg",
+      "category": "Electronics",
+      "sellerId": "undefined",
+      "image": "/assets/drill.jpg",
+      "status": "approved"
+    },
+    {
+      "id": "104f",
+      "name": "ww",
+      "price": 22,
+      "category": "Electronics",
+      "sellerId": "adsxa",
+      "status": "approved"
+    },
+    {
+      "id": "4607",
+      "name": "qq",
+      "price": 22,
+      "category": "Pet Care\n                ",
+      "description": "qq",
+      "image": "qq",
+      "ratings": []
+    },
+    {
+      "id": "28be",
+      "name": "oo",
+      "price": 888,
+      "category": "Video Games\n                ",
+      "description": "oo",
+      "image": "oo",
+      "ratings": []
+    },
+    {
+      "id": "1510",
+      "name": "pp",
+      "price": 98898,
+      "category": "Kitchen",
+      "description": "pp",
+      "image": "pp",
+      "ratings": []
+    },
+    {
+      "id": "fee5",
+      "name": "mm",
+      "price": 88,
+      "category": "Health & Personal Care\n                ",
+      "description": "mm",
+      "image": "mm",
       "ratings": []
     }
   ],

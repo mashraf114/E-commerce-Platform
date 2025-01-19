@@ -13,10 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const userPassword = passwordInput.value.trim();
 
     // Basic validation for email and password fields
-    if (!userEmail || !userPassword) {
-      alert("Please enter both email and password.");
-      return;
-    }
+    // if (!userEmail || !userPassword) {
+    //   alert("Please enter both email and password.");
+    //   return;
+    // }
 
     try {
       // Make a GET request to check if the email exists
