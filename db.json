@@ -22,7 +22,7 @@
       "id": "1737247913535",
       "name": "Adele",
       "email": "adele@gmail.com",
-      "role": "Customer",
+      "role": "seller",
       "password": "adele@gmail.com",
       "homeAddress": "123 zagzag",
       "workAddress": "",
@@ -113,6 +113,14 @@
       "description": "mm",
       "image": "mm",
       "ratings": []
+    },
+    {
+      "id": "1737261590164",
+      "name": "abc",
+      "price": 123,
+      "category": "Clothes",
+      "sellerId": "99",
+      "status": "approved"
     }
   ],
   "orders": [
@@ -142,6 +150,22 @@
       "status": "pending",
       "sellerId": "we",
       "customerId": "we"
+    },
+    {
+      "id": "2b6c",
+      "items": [
+        {
+          "id": "f30b",
+          "name": "PS4",
+          "price": 999,
+          "quantity": 5,
+          "image": "/assets/drill.jpg"
+        }
+      ],
+      "total": 4995,
+      "paymentMethod": "cash-on-delivery",
+      "date": "1/19/2025, 6:47:36 AM",
+      "customerId": "1737247913535"
     }
   ]
 }

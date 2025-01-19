@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
           const user = users[0];
           if (user.password === userPassword) {
             // Authentication successful, store user info in sessionStorage
-            sessionStorage.setItem("currentUser", JSON.stringify(user)); // Store the user in sessionStorage
+            sessionStorage.setItem("currentUser", JSON.stringify(user));
 
             // Redirect to the main page (index)
             window.location.replace("../index.html"); // Adjust the redirect as needed
@@ -46,3 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
+function redirectToRegister() {
+  window.location.href = "/views/register.html";
+}

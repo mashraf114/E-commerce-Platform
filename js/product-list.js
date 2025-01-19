@@ -15,14 +15,17 @@ const fetchProducts = async () => {
     }
     const products = await response.json();
     const category = getQueryParam("category");
+    const searchQuery = getQueryParam("search");
 
-    // Filter products by category and status
-    const filteredProducts = category
-      ? products.filter(
-          (product) =>
-            product.category === category && product.status === "approved"
-        )
-      : products.filter((product) => product.status === "approved");
+    // Filter products by category, search query, and status
+    const filteredProducts = products.filter((product) => {
+      const matchesCategory = category ? product.category === category : true;
+      const matchesSearch = searchQuery
+        ? product.name.toLowerCase().includes(searchQuery.toLowerCase())
+        : true;
+      const isApproved = product.status === "approved";
+      return matchesCategory && matchesSearch && isApproved;
+    });
 
     renderProducts(filteredProducts);
   } catch (error) {
@@ -33,6 +36,11 @@ const fetchProducts = async () => {
 // Function to render products
 const renderProducts = (products) => {
   shopSection.innerHTML = ""; // Clear existing content
+  if (products.length === 0) {
+    shopSection.innerHTML = "<p>No products found.</p>";
+    return;
+  }
+
   products.forEach((product) => {
     // Handle missing or undefined values
     const name = product.name || "Unnamed Product";

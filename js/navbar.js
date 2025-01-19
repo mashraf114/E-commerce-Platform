@@ -89,7 +89,6 @@ async function updateDeliverToAddress() {
   }
 }
 
-// Function to update the cart quantity
 function updateCartQuantity() {
   const cartQuantityElement = document.getElementById("cart-quantity");
 
@@ -98,9 +97,20 @@ function updateCartQuantity() {
     return;
   }
 
+  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+
+  if (!currentUser) {
+    // If no user is logged in, hide the cart quantity
+    cartQuantityElement.textContent = ""; // Clear the text
+    cartQuantityElement.style.display = "none"; // Hide the element
+    return;
+  }
+
+  // If a user is logged in, update the cart quantity
   const cart = JSON.parse(localStorage.getItem("cart")) || [];
   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
   cartQuantityElement.textContent = totalQuantity;
+  cartQuantityElement.style.display = "inline"; // Ensure the element is visible
 }
 
 // Function to handle category selection

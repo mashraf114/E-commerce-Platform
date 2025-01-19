@@ -1,8 +1,7 @@
-// profile.js
-
-// Function to fetch user data from db.json
 async function fetchUserData() {
   const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+  console.log("Current User from sessionStorage:", currentUser); // Debugging
+
   if (!currentUser) {
     alert("You are not logged in. Redirecting to the home page...");
     window.location.href = "/index.html";
@@ -10,12 +9,22 @@ async function fetchUserData() {
   }
 
   try {
+    console.log("Fetching user data from backend..."); // Debugging
     const response = await fetch("http://localhost:3000/users");
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    // Parse the response as JSON
     const users = await response.json();
+    console.log("Fetched Users:", users); // Debugging
+
+    // Find the current user in the fetched data
     const user = users.find((u) => u.id === currentUser.id);
+    console.log("Fetched User Data:", user); // Debugging
 
     if (user) {
-      // Update personal information
       document.getElementById("profile-name").textContent =
         user.name || "Not provided";
       document.getElementById("profile-email").textContent =
@@ -28,222 +37,211 @@ async function fetchUserData() {
 
       // Update addresses
       displayAddresses(user);
+
+      // Render admin navigation based on role
+      renderAdminNavigation(user.role);
     } else {
       alert("User not found. Redirecting to the home page...");
       window.location.href = "/index.html";
     }
   } catch (error) {
-    console.error("Error fetching user data:", error);
+    console.error("Error fetching user data:", error); // Debugging
     alert("An error occurred while fetching user data. Please try again.");
   }
 }
 
-// Function to display order history from localStorage
-function displayOrderHistory() {
-  const orders = JSON.parse(localStorage.getItem("orders")) || [];
-  const orderHistory = document.getElementById("order-history");
+function renderAdminNavigation(role) {
+  const adminNavPlaceholder = document.getElementById("admin-nav-placeholder");
 
-  if (orders.length === 0) {
-    orderHistory.innerHTML = "<li>No orders found.</li>";
-    return;
+  // Define navigation items based on role
+  const navItems = [];
+  if (role === "Admin" || role === "admin") {
+    navItems.push(
+      {
+        href: "/views/user-management.html",
+        icon: "fa-users",
+        text: "Users",
+      },
+      {
+        href: "/views/product-management.html",
+        icon: "fa-box",
+        text: "Products",
+      },
+      {
+        href: "/views/order-management.html",
+        icon: "fa-shopping-cart",
+        text: "Orders",
+      }
+    );
+  } else if (role === "Seller" || role === "seller") {
+    navItems.push(
+      {
+        href: "/views/product-management.html",
+        icon: "fa-box",
+        text: "Products",
+      },
+      {
+        href: "/views/order-management.html",
+        icon: "fa-shopping-cart",
+        text: "Orders",
+      }
+    );
+  } else if (role === "Customer" || role === "customer") {
+    navItems.push({
+      href: "/views/order-management.html",
+      icon: "fa-shopping-cart",
+      text: "Orders",
+    });
   }
 
-  orderHistory.innerHTML = orders
-    .map(
-      (order) => `
-      <li>
-        <i class="fas fa-box"></i>
-        <strong>Order Total: $${order.total}</strong> - ${order.date}
-        <br>
-        <small>Payment Method: ${order.paymentMethod}</small>
-      </li>
-    `
-    )
-    .join("");
+  // Create the admin navigation HTML
+  if (navItems.length > 0) {
+    const navHTML = `
+      <nav class="admin-nav">
+        <h3>Dashboard</h3>
+        <ul>
+          ${navItems
+            .map(
+              (item) => `
+            <li>
+              <a href="${item.href}">
+                <i class="fas ${item.icon}"></i>
+                ${item.text}
+              </a>
+            </li>
+          `
+            )
+            .join("")}
+        </ul>
+      </nav>
+    `;
+    adminNavPlaceholder.innerHTML = navHTML;
+  }
 }
+// Function to display order history from db.json
+async function displayOrderHistory() {
+  const orderHistory = document.getElementById("order-history");
+
+  try {
+    // Fetch orders from the backend
+    const response = await fetch("http://localhost:3000/orders");
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const orders = await response.json();
+    console.log("Fetched Orders:", orders); // Debugging
+
+    // Filter orders for the current user (if not an admin)
+    const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+    const isAdmin =
+      currentUser &&
+      (currentUser.role === "Admin" || currentUser.role === "admin");
+
+    const userOrders = isAdmin
+      ? orders // Admins can see all orders
+      : orders.filter((order) => order.customerId === currentUser.id); // Customers see only their orders
+
+    if (userOrders.length === 0) {
+      orderHistory.innerHTML = "<li>No orders found.</li>";
+      return;
+    }
+
+    // Render the orders
+    orderHistory.innerHTML = userOrders
+      .map(
+        (order) => `
+        <li>
+          <i class="fas fa-box"></i>
+          <strong>Order Total: $${order.total}</strong> - ${order.date}
+          <br>
+          <small>Payment Method: ${order.paymentMethod}</small>
+        </li>
+      `
+      )
+      .join("");
+  } catch (error) {
+    console.error("Error fetching order history:", error); // Debugging
+    orderHistory.innerHTML =
+      "<li>Error loading order history. Please try again later.</li>";
+  }
+}
+// Function to display order history from localStorage
+// function displayOrderHistory() {
+//   const orders = JSON.parse(localStorage.getItem("orders")) || [];
+//   const orderHistory = document.getElementById("order-history");
+
+//   if (orders.length === 0) {
+//     orderHistory.innerHTML = "<li>No orders found.</li>";
+//     return;
+//   }
+
+//   orderHistory.innerHTML = orders
+//     .map(
+//       (order) => `
+//       <li>
+//         <i class="fas fa-box"></i>
+//         <strong>Order Total: $${order.total}</strong> - ${order.date}
+//         <br>
+//         <small>Payment Method: ${order.paymentMethod}</small>
+//       </li>
+//     `
+//     )
+//     .join("");
+// }
 
 // Function to display addresses
 function displayAddresses(user) {
   const addresses = document.getElementById("profile-addresses");
-  const homeAddress = user.homeAddress || "Not provided";
-  const workAddress = user.workAddress || "Not provided";
+  if (addresses) {
+    const homeAddress = user.homeAddress || "Not provided";
+    const workAddress = user.workAddress || "Not provided";
 
-  addresses.innerHTML = `
-    <li>
-      <i class="fas fa-home"></i>
-      <strong>Home Address:</strong> ${homeAddress}
-    </li>
-    <li>
-      <i class="fas fa-building"></i>
-      <strong>Work Address:</strong> ${workAddress}
-    </li>
-  `;
-}
-
-// Function to open the "Edit Information" popup
-function openEditInformationPopup() {
-  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
-  if (!currentUser) {
-    alert("You are not logged in. Redirecting to the home page...");
-    window.location.href = "/index.html";
-    return;
+    addresses.innerHTML = `
+      <li>
+        <i class="fas fa-home"></i>
+        <strong>Home Address:</strong> ${homeAddress}
+      </li>
+      <li>
+        <i class="fas fa-building"></i>
+        <strong>Work Address:</strong> ${workAddress}
+      </li>
+    `;
+  } else {
+    console.error("Element with ID 'profile-addresses' not found.");
   }
-
-  fetch(`http://localhost:3000/users/${currentUser.id}`)
-    .then((response) => response.json())
-    .then((user) => {
-      Swal.fire({
-        title: "Edit Information",
-        html: `
-          <input type="text" id="name" class="swal2-input" placeholder="Name" value="${
-            user.name || ""
-          }">
-          <input type="email" id="email" class="swal2-input" placeholder="Email" value="${
-            user.email || ""
-          }">
-          <input type="text" id="phone" class="swal2-input" placeholder="Phone" value="${
-            user.phone || ""
-          }">
-          <input type="password" id="password" class="swal2-input" placeholder="Password" value="${
-            user.password || ""
-          }">
-          <input type="text" id="role" class="swal2-input" placeholder="Role" value="${
-            user.role || ""
-          }">
-        `,
-        focusConfirm: false,
-        preConfirm: () => {
-          return {
-            name: document.getElementById("name").value,
-            email: document.getElementById("email").value,
-            phone: document.getElementById("phone").value,
-            password: document.getElementById("password").value,
-            role: document.getElementById("role").value,
-          };
-        },
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const updatedUser = { ...user, ...result.value };
-          updateUserData(updatedUser);
-        }
-      });
-    })
-    .catch((error) => {
-      console.error("Error fetching user data:", error);
-      alert("An error occurred while fetching user data. Please try again.");
-    });
-}
-
-// Function to update user data in db.json
-function updateUserData(updatedUser) {
-  fetch(`http://localhost:3000/users/${updatedUser.id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(updatedUser),
-  })
-    .then((response) => response.json())
-    .then(() => {
-      Swal.fire("Success!", "Your information has been updated.", "success");
-      fetchUserData(); // Refresh the profile data
-    })
-    .catch((error) => {
-      console.error("Error updating user data:", error);
-      Swal.fire(
-        "Error",
-        "An error occurred while updating your information.",
-        "error"
-      );
-    });
-}
-
-// Function to open the "Manage Addresses" popup
-function openManageAddressesPopup() {
-  const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
-  if (!currentUser) {
-    alert("You are not logged in. Redirecting to the home page...");
-    window.location.href = "/index.html";
-    return;
-  }
-
-  fetch(`http://localhost:3000/users/${currentUser.id}`)
-    .then((response) => response.json())
-    .then((user) => {
-      Swal.fire({
-        title: "Manage Addresses",
-        html: `
-          <input type="text" id="homeAddress" class="swal2-input" placeholder="Home Address" value="${
-            user.homeAddress || ""
-          }">
-          <input type="text" id="workAddress" class="swal2-input" placeholder="Work Address" value="${
-            user.workAddress || ""
-          }">
-          <br>
-          <label>
-            <input type="radio" name="defaultAddress" value="home" ${
-              !user.defaultAddress || user.defaultAddress === "home"
-                ? "checked"
-                : ""
-            }> Home Address
-          </label>
-          <label>
-            <input type="radio" name="defaultAddress" value="work" ${
-              user.defaultAddress === "work" ? "checked" : ""
-            }> Work Address
-          </label>
-        `,
-        focusConfirm: false,
-        preConfirm: () => {
-          return {
-            homeAddress: document.getElementById("homeAddress").value,
-            workAddress: document.getElementById("workAddress").value,
-            defaultAddress: document.querySelector(
-              'input[name="defaultAddress"]:checked'
-            ).value,
-          };
-        },
-      }).then((result) => {
-        if (result.isConfirmed) {
-          const updatedUser = { ...user, ...result.value };
-          updateUserData(updatedUser);
-        }
-      });
-    })
-    .catch((error) => {
-      console.error("Error fetching user data:", error);
-      alert("An error occurred while fetching user data. Please try again.");
-    });
-}
-
-// Function to confirm logout
-function confirmLogout() {
-  const confirmation = confirm("Are you sure you want to log out?");
-  if (confirmation) {
-    logout(); // Call the logout function if the user confirms
-  }
-}
-
-// Log out function to remove the session data and redirect to home page
-function logout() {
-  sessionStorage.removeItem("currentUser"); // Remove the logged-in user from sessionStorage
-  window.location.replace("/index.html"); // Redirect to home page
 }
 
 // Call fetchUserData when the page loads
 fetchUserData();
 
-// Add event listeners for "Edit Information" and "Manage Addresses" links
-document.addEventListener("DOMContentLoaded", () => {
-  document.querySelector('a[href="#"]').addEventListener("click", (e) => {
-    e.preventDefault();
-    openEditInformationPopup();
+// Function to confirm logout using SweetAlert2
+function confirmLogout() {
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You will be logged out of your account.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#ffa41c",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, log out!",
+    cancelButtonText: "Cancel",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      logout(); // Call the logout function if the user confirms
+    }
   });
+}
 
-  document
-    .querySelector('a[href="#manage-addresses"]')
-    .addEventListener("click", (e) => {
-      e.preventDefault();
-      openManageAddressesPopup();
-    });
-});
+// Log out function to remove the session data and redirect to home page
+function logout() {
+  sessionStorage.removeItem("currentUser"); // Remove the logged-in user from sessionStorage
+  Swal.fire({
+    title: "Logged Out!",
+    text: "You have been successfully logged out.",
+    icon: "success",
+    confirmButtonColor: "#ffa41c",
+  }).then(() => {
+    window.location.href = "/index.html"; // Redirect to home page
+  });
+}

@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Your Profile</title>
-
     <link rel="stylesheet" href="/css/style.css" />
     <script defer src="../js/profile.js"></script>
     <link rel="icon" href="/assets/miniLogo.png" type="image/x-icon" />
-
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
@@ -27,7 +25,7 @@
         background-color: white;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
 
       .profile-header {
@@ -47,6 +45,51 @@
         color: #ffa41c;
       }
 
+      /* Admin Navigation Styles */
+      .admin-nav {
+        background-color: #ffffff;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .admin-nav h3 {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 15px;
+        border-bottom: 2px solid #ffa41c;
+        padding-bottom: 10px;
+      }
+
+      .admin-nav ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        gap: 15px;
+        justify-content: flex-start; /* Align items to the left */
+      }
+
+      .admin-nav ul li {
+        display: inline;
+      }
+
+      .admin-nav ul li a {
+        color: #0066c0;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 8px 12px;
+        border-radius: 4px;
+        transition: background-color 0.3s ease;
+      }
+
+      .admin-nav ul li a:hover {
+        background-color: #f0f2f5;
+      }
+
+      /* Profile Section Styles */
       .profile-section {
         margin-bottom: 30px;
       }
@@ -108,27 +151,20 @@
 
       /* Responsive Design */
       @media (max-width: 768px) {
-        .profile-header h1 {
-          font-size: 20px;
+        .admin-nav ul {
+          flex-direction: column;
+          gap: 10px;
         }
 
-        .profile-section h2 {
-          font-size: 18px;
-        }
-
-        .profile-section p {
-          font-size: 14px;
-        }
-
-        .profile-section button {
-          width: 100%;
+        .admin-nav ul li a {
+          display: block;
+          text-align: center;
         }
       }
     </style>
   </head>
   <body class="profile-page">
     <div id="navbar-placeholder"></div>
-
     <div class="profile-container">
       <!-- Profile Header -->
       <div class="profile-header">
@@ -136,15 +172,19 @@
         <h1>Your Profile</h1>
       </div>
 
+      <!-- Admin Navigation Placeholder -->
+      <div id="admin-nav-placeholder"></div>
+
       <!-- Personal Information Section -->
       <div class="profile-section">
         <h2><i class="fas fa-user"></i> Personal Information</h2>
-        <p><strong>Name:</strong> <span id="profile-name">Loading...</span></p>
+        <p><strong>Name:</strong> <span id="profile-name">Adele</span></p>
         <p>
-          <strong>Email:</strong> <span id="profile-email">Loading...</span>
+          <strong>Email:</strong>
+          <span id="profile-email">adele@gmail.com</span>
         </p>
         <p>
-          <strong>Phone:</strong> <span id="profile-phone">Loading...</span>
+          <strong>Phone:</strong> <span id="profile-phone">Not provided</span>
         </p>
         <a href="#">Edit Information</a>
       </div>
@@ -153,18 +193,20 @@
       <div class="profile-section">
         <h2><i class="fas fa-shopping-cart"></i> Order History</h2>
         <ul id="order-history">
-          <li>Loading order history...</li>
+          <li>
+            <i class="fas fa-box"></i>
+            <strong>Order Total: $1395</strong> - 1/18/2025, 6:20:11 PM
+            <br />
+            <small>Payment Method: cash-on-delivery</small>
+          </li>
+          <li>
+            <i class="fas fa-box"></i>
+            <strong>Order Total: $88666</strong> - 1/18/2025, 6:29:59 PM
+            <br />
+            <small>Payment Method: cash-on-delivery</small>
+          </li>
         </ul>
         <a href="#">View All Orders</a>
-      </div>
-
-      <!-- Addresses Section -->
-      <div class="profile-section">
-        <h2><i class="fas fa-map-marker-alt"></i> Addresses</h2>
-        <ul id="profile-addresses">
-          <li>Loading addresses...</li>
-        </ul>
-        <a href="#manage-addresses">Manage Addresses</a>
       </div>
 
       <!-- Logout Button -->
@@ -173,14 +215,10 @@
       </div>
     </div>
     <script>
-      // Load navbar.html
       fetch("/views/navbar.html")
         .then((response) => response.text())
         .then((data) => {
-          // Insert the navbar HTML into the placeholder
           document.getElementById("navbar-placeholder").innerHTML = data;
-
-          // Load navbar.js after the navbar is inserted
           const script = document.createElement("script");
           script.src = "/js/navbar.js";
           document.body.appendChild(script);

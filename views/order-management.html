@@ -3,10 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Management</title>
-    <link rel="icon" href="/assets/miniLogo.png" type="image/x-icon" />
-    <link rel="stylesheet" href="/css/style.css" />
-    <script defer src="/js/navbar.js"></script>
+    <title>Order Management</title>
+    <script defer src="../../js/order-management.js"></script>
     <link rel="icon" href="/assets/miniLogo.png" type="image/x-icon" />
     <link rel="stylesheet" href="/css/style.css" />
     <script defer src="/js/navbar.js"></script>
@@ -87,7 +85,7 @@
       }
 
       /* Edit Button */
-      .edit-product {
+      .edit-order {
         background-color: #007185; /* Amazon's blue color */
         color: white;
         border: none;
@@ -97,12 +95,12 @@
         font-size: 12px;
       }
 
-      .edit-product:hover {
+      .edit-order:hover {
         background-color: #005f6b; /* Darker blue on hover */
       }
 
       /* Delete Button */
-      .delete-product {
+      .delete-order {
         background-color: #ff4d4d; /* Red color */
         color: white;
         border: none;
@@ -112,7 +110,7 @@
         font-size: 12px;
       }
 
-      .delete-product:hover {
+      .delete-order:hover {
         background-color: #cc0000; /* Darker red on hover */
       }
 
@@ -232,92 +230,67 @@
         }
       }
     </style>
-    <script defer src="../../js/product-management.js"></script>
   </head>
   <body>
     <div id="navbar-placeholder"></div>
 
     <header>
-      <h1>product Management</h1>
+      <h1>Order Management</h1>
       <nav>
         <ul>
-          <li><a href="#user-management">users</a></li>
+          <li><a href="#user-management">Users</a></li>
           <li><a href="#product-management">Products</a></li>
-          <li><a href="#order-monitoring">Orders</a></li>
+          <li><a href="#order-management">Orders</a></li>
         </ul>
       </nav>
     </header>
 
     <main>
-      <!-- Product Management Section -->
-      <section id="product-management">
-        <h2>Product Management</h2>
-        <button id="add-product">Add Product</button>
-        <table id="product-table">
+      <section id="order-management">
+        <h2>Order Management</h2>
+        <button id="add-order">Add Order</button>
+        <table id="order-table">
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th>Category</th>
-              <th>Seller ID</th>
+              <th>Order ID</th>
+              <th>Product</th>
+              <th>Quantity</th>
+              <th>Total Cost</th>
               <th>Status</th>
+              <th>Seller ID</th>
+              <th>Customer ID</th>
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>John Doe</td>
-              <td>john@example.com</td>
-              <td>Admin</td>
-              <td>********</td>
-              <td>
-                <button class="edit-product" data-product-id="1">Edit</button>
-                <button class="delete-product" data-product-id="1">
-                  Delete
-                </button>
-              </td>
-            </tr>
-          </tbody>
+          <tbody></tbody>
         </table>
 
-        <div id="product-form-modal" class="modal">
+        <div id="order-form-modal" class="modal">
           <div class="modal-content">
-            <h3 id="form-title">Add Product</h3>
-            <form id="product-form">
-              <label for="product-name">Name:</label>
-              <input type="text" id="product-name" required /><br />
+            <h3 id="form-title">Add Order</h3>
+            <form id="order-form">
+              <label for="order-product">Product:</label>
+              <input type="text" id="order-product" required /><br />
 
-              <label for="product-price">Price:</label>
-              <input type="number" id="product-price" required /><br />
+              <label for="order-quantity">Quantity:</label>
+              <input type="number" id="order-quantity" required /><br />
 
-              <label for="product-category">Category:</label>
-              <select id="product-category" required>
-                <option value="" disabled selected>
-                  Select product category
-                </option>
-                <option value="Clothes">Clothes</option>
-                <option value="Health & Personal Care">
-                  Health & Personal Care
-                </option>
-                <option value="Furniture">Furniture</option>
-                <option value="Electronics">Electronics</option>
-                <option value="Video Games">Video Games</option>
-                <option value="Pet Care">Pet Care</option>
-                <option value="Tools & Home Improvement">
-                  Tools & Home Improvement
-                </option>
-                <option value="Kitchen">Kitchen</option>
-              </select>
-              <br />
-              <label for="product-seller">Seller ID:</label>
-              <input type="text" id="product-seller" required /><br />
-              <label for="product-status">Status:</label>
-              <select id="product-status" name="status">
-                <option value="approved">Approved</option>
-                <option value="rejected">Rejected</option></select
+              <label for="order-price-per-unit">Price per Unit:</label>
+              <input type="number" id="order-price-per-unit" required /><br />
+
+              <label for="order-status">Status:</label>
+              <select id="order-status" name="status">
+                <option value="pending">Pending</option>
+                <option value="shipped">Shipped</option>
+                <option value="delivered">Delivered</option></select
               ><br />
+
+              <label for="order-seller">Seller ID:</label>
+              <input type="text" id="order-seller" required /><br />
+
+              <label for="order-customer">Customer ID:</label>
+              <input type="text" id="order-customer" required /><br />
+
               <button type="submit">Save</button>
               <button type="button" id="close-form">Cancel</button>
             </form>
@@ -325,5 +298,18 @@
         </div>
       </section>
     </main>
+    <script>
+      fetch("/views/navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("navbar-placeholder").innerHTML = data;
+          const script = document.createElement("script");
+          script.src = "/js/navbar.js";
+          document.body.appendChild(script);
+        })
+        .catch((error) => {
+          console.error("Error loading navbar:", error);
+        });
+    </script>
   </body>
 </html>
